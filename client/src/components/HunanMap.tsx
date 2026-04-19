@@ -283,14 +283,13 @@ export default function HunanMap({ onTeamSelect, selectedTeam, show3D, onToggle3
     setActiveServiceLayer(layer);
     setActiveServicePoiId(firstPoi?.id ?? 'team-changsha');
     setLegendExpanded(true);
-    focusChangshaDemo(layer);
 
     if (layer === 'team' || layer === 'stadium') {
       onTeamSelect(CHANGSHA_TEAM);
     } else if (selectedTeam?.id === 'changsha') {
       onTeamSelect(null);
     }
-  }, [focusChangshaDemo, onTeamSelect, selectedTeam]);
+  }, [onTeamSelect, selectedTeam]);
 
   // Initialize map
   useEffect(() => {
@@ -518,6 +517,20 @@ export default function HunanMap({ onTeamSelect, selectedTeam, show3D, onToggle3
     });
   }, [mapReady, geoLoaded, onTeamSelect, selectedTeam]);
 
+  // Keep Changsha demo zoom stable when switching layers
+  useEffect(() => {
+    if (!mapReady || !geoLoaded || show3D) return;
+
+    if (activeServiceLayer !== 'team') {
+      focusChangshaDemo(activeServiceLayer);
+      return;
+    }
+
+    if (selectedTeam?.id === 'changsha') {
+      focusChangshaDemo('team');
+    }
+  }, [activeServiceLayer, focusChangshaDemo, geoLoaded, mapReady, selectedTeam, show3D]);
+
   // Render Changsha service example markers according to active layer
   useEffect(() => {
     if (!mapReady || !mapInstanceRef.current || !geoLoaded) return;
@@ -601,7 +614,11 @@ export default function HunanMap({ onTeamSelect, selectedTeam, show3D, onToggle3
     });
 
     if (selectedTeam) {
-      const zoom = selectedTeam.id === 'changsha' && activeServiceLayer !== 'team' ? 13 : 9.5;
+      if (selectedTeam.id === 'changsha' && activeServiceLayer !== 'team') {
+        return;
+      }
+
+      const zoom = selectedTeam.id === 'changsha' ? 10.6 : 9.5;
       map.flyTo([selectedTeam.lat, selectedTeam.lng], zoom, {
         duration: 1.2,
         easeLinearity: 0.25,
@@ -617,10 +634,10 @@ export default function HunanMap({ onTeamSelect, selectedTeam, show3D, onToggle3
 
   // Reset view when exiting 3D and no team selected
   useEffect(() => {
-    if (!show3D && !selectedTeam && mapInstanceRef.current) {
+    if (!show3D && !selectedTeam && activeServiceLayer === 'team' && mapInstanceRef.current) {
       mapInstanceRef.current.flyTo(HUNAN_CENTER, 7.8, { duration: 1 });
     }
-  }, [show3D, selectedTeam]);
+  }, [activeServiceLayer, show3D, selectedTeam]);
 
   return (
     <div className="relative h-full w-full">
