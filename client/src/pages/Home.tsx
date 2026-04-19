@@ -19,7 +19,8 @@ import StatsBar from '@/components/StatsBar';
 import LogoBadge from '@/components/LogoBadge';
 import { teams, type Team, HERO_BANNER, leagueStats } from '@/data/teams';
 import { Trophy, Map, ArrowLeft } from 'lucide-react';
-import { assetPath, routePath } from '@/lib/sitePaths';
+import { projectLogo } from '@/data/feature-data';
+import { routePath } from '@/lib/sitePaths';
 
 export default function Home() {
   const [selectedTeam, setSelectedTeam] = useState<Team | null>(null);
@@ -103,7 +104,7 @@ export default function Home() {
                   border: '1.5px solid rgba(255,255,255,0.25)',
                 }}
               >
-                <img src={assetPath('/assets/xiangchao-logo.png')} alt="湘超 LOGO" className="w-7 h-7 object-contain" />
+                <img src={projectLogo} alt="湘超 LOGO" className="w-7 h-7 object-contain" />
                 <div className="absolute inset-[3px] border border-white/10 rounded-[1px]" />
               </div>
               {/* Outer seal corner marks */}

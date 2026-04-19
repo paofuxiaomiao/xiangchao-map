@@ -1,4 +1,4 @@
-import { assetPath } from '@/lib/sitePaths';
+import projectLogoUrl from '@/assets/xiangchao-logo.png';
 
 export type FeatureTeam = {
   id: string;
@@ -542,4 +542,4 @@ export const moduleStats = [
   { label: '服务图层', value: '6' },
 ];
 
-export const projectLogo = assetPath('/assets/xiangchao-logo.png');
+export const projectLogo = projectLogoUrl;

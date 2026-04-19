@@ -1,5 +1,6 @@
-const rawBase = import.meta.env.BASE_URL || "/";
-const trimmedBase = rawBase.endsWith("/") ? rawBase.slice(0, -1) : rawBase;
+const envBase = import.meta.env.VITE_BASE_PATH || import.meta.env.BASE_URL || "/";
+const rawBase = envBase.endsWith("/") ? envBase : `${envBase}/`;
+const trimmedBase = rawBase === "/" ? "" : rawBase.slice(0, -1);
 
 export function routePath(path: string = "/") {
   const normalizedPath = path === "/" ? "/" : `/${path.replace(/^\/+/, "")}`;
@@ -16,5 +17,6 @@ export function routePath(path: string = "/") {
 }
 
 export function assetPath(path: string) {
-  return `${rawBase}${path.replace(/^\/+/, "")}`;
+  const normalizedPath = path.replace(/^\/+/, "");
+  return trimmedBase ? `${trimmedBase}/${normalizedPath}` : `/${normalizedPath}`;
 }
