@@ -6,6 +6,8 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Landing from "./pages/Landing";
 import Home from "./pages/Home";
+import FeatureModules from "./pages/FeatureModules";
+import H5Experience from "./pages/H5Experience";
 
 
 function Router() {
@@ -13,6 +15,8 @@ function Router() {
     <Switch>
       <Route path={"/"} component={Landing} />
       <Route path={"/map"} component={Home} />
+      <Route path={"/modules"} component={FeatureModules} />
+      <Route path={"/h5"} component={H5Experience} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />

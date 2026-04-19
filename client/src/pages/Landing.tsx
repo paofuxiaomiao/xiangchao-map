@@ -14,6 +14,7 @@ import { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { useLocation } from 'wouter';
 import { teams, leagueStats } from '@/data/teams';
+import LogoBadge from '@/components/LogoBadge';
 import { MapPin, Trophy, Flame, ChevronDown, ArrowRight, Users, Timer, TrendingUp, Zap, Star } from 'lucide-react';
 
 // CDN image URLs
@@ -80,6 +81,14 @@ export default function Landing() {
     setLocation('/map');
   };
 
+  const handleOpenModules = () => {
+    setLocation('/modules');
+  };
+
+  const handleOpenH5 = () => {
+    setLocation('/h5');
+  };
+
   return (
     <div className="min-h-screen bg-[#0A0A0A] text-white overflow-x-hidden">
       {/* ===== HERO SECTION ===== */}
@@ -109,13 +118,28 @@ export default function Landing() {
                 initial={{ y: -30, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.3, duration: 0.8 }}
-                className="inline-flex items-center gap-2 px-5 py-2 mb-8 rounded-full border border-white/15 bg-white/5 backdrop-blur-md"
+                className="inline-flex items-center gap-2 px-5 py-2 mb-6 rounded-full border border-white/15 bg-white/5 backdrop-blur-md"
               >
                 <Flame className="w-4 h-4 text-[#FF6B35]" />
                 <span className="text-sm tracking-[0.2em] text-white/80 font-medium" style={{ fontFamily: "'DM Mono', monospace" }}>
                   2025 HUNAN FOOTBALL LEAGUE
                 </span>
                 <div className="w-1.5 h-1.5 rounded-full bg-[#FF6B35] animate-pulse" />
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          <AnimatePresence>
+            {heroLoaded && (
+              <motion.div
+                initial={{ y: -20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.45, duration: 0.8 }}
+                className="mb-8 flex justify-center"
+              >
+                <div className="rounded-[24px] border border-white/15 bg-white/10 px-4 py-3 backdrop-blur-xl">
+                  <LogoBadge light subtitle="湖南足球地理信息服务平台" />
+                </div>
               </motion.div>
             )}
           </AnimatePresence>
@@ -179,23 +203,42 @@ export default function Landing() {
                   initial={{ y: 30, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 1.2, duration: 0.8 }}
-                  className="flex flex-col sm:flex-row items-center justify-center gap-4"
+                  className="flex flex-col items-center justify-center gap-4"
                 >
-                  <button
-                    onClick={handleEnterMap}
-                    className="group relative px-10 py-4 rounded-xl text-lg font-bold tracking-wider overflow-hidden transition-all duration-300 hover:scale-105 active:scale-95"
-                    style={{ fontFamily: "'Noto Sans SC', sans-serif" }}
-                  >
-                    <div className="absolute inset-0 bg-gradient-to-r from-[#D32F2F] via-[#E53935] to-[#FF5252] group-hover:from-[#B71C1C] group-hover:via-[#D32F2F] group-hover:to-[#E53935] transition-all duration-500" />
-                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{
-                      background: 'radial-gradient(circle at 50% 50%, rgba(255,255,255,0.15) 0%, transparent 70%)',
-                    }} />
-                    <span className="relative flex items-center gap-3 text-white">
-                      <MapPin className="w-5 h-5" />
-                      进入数字地图看板
-                      <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                    </span>
-                  </button>
+                  <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <button
+                      onClick={handleEnterMap}
+                      className="group relative px-10 py-4 rounded-xl text-lg font-bold tracking-wider overflow-hidden transition-all duration-300 hover:scale-105 active:scale-95"
+                      style={{ fontFamily: "'Noto Sans SC', sans-serif" }}
+                    >
+                      <div className="absolute inset-0 bg-gradient-to-r from-[#D32F2F] via-[#E53935] to-[#FF5252] group-hover:from-[#B71C1C] group-hover:via-[#D32F2F] group-hover:to-[#E53935] transition-all duration-500" />
+                      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{
+                        background: 'radial-gradient(circle at 50% 50%, rgba(255,255,255,0.15) 0%, transparent 70%)',
+                      }} />
+                      <span className="relative flex items-center gap-3 text-white">
+                        <MapPin className="w-5 h-5" />
+                        进入数字地图看板
+                        <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                      </span>
+                    </button>
+                  </div>
+
+                  <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+                    <button
+                      onClick={handleOpenModules}
+                      className="rounded-full border border-white/15 bg-white/10 px-6 py-3 text-sm font-medium text-white/88 backdrop-blur-md transition-all duration-300 hover:bg-white/15"
+                      style={{ fontFamily: "'Noto Sans SC', sans-serif" }}
+                    >
+                      查看功能模块
+                    </button>
+                    <button
+                      onClick={handleOpenH5}
+                      className="rounded-full border border-white/15 bg-black/25 px-6 py-3 text-sm font-medium text-white/88 backdrop-blur-md transition-all duration-300 hover:bg-black/35"
+                      style={{ fontFamily: "'Noto Sans SC', sans-serif" }}
+                    >
+                      进入 H5 体验
+                    </button>
+                  </div>
                 </motion.div>
               </>
             )}
