@@ -1,0 +1,252 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-serif-cn: 'Noto Serif SC', serif;
+  --font-sans-cn: 'Noto Sans SC', sans-serif;
+  --font-mono: 'DM Mono', monospace;
+  --color-xiang-red: oklch(0.55 0.22 25);
+  --color-xiang-gold: oklch(0.72 0.14 85);
+  --color-xiang-green: oklch(0.55 0.15 145);
+  --color-xiang-dark: oklch(0.20 0.02 260);
+  --color-xiang-charcoal: oklch(0.30 0.02 260);
+}
+
+:root {
+  --primary: oklch(0.50 0.22 25);
+  --primary-foreground: oklch(0.98 0 0);
+  --sidebar-primary: oklch(0.50 0.22 25);
+  --sidebar-primary-foreground: oklch(0.98 0 0);
+  --chart-1: oklch(0.50 0.22 25);
+  --chart-2: oklch(0.72 0.14 85);
+  --chart-3: oklch(0.55 0.15 145);
+  --chart-4: oklch(0.60 0.18 25);
+  --chart-5: oklch(0.45 0.15 25);
+  --radius: 0.5rem;
+  --background: oklch(0.97 0.005 260);
+  --foreground: oklch(0.18 0.02 260);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.18 0.02 260);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.18 0.02 260);
+  --secondary: oklch(0.95 0.005 260);
+  --secondary-foreground: oklch(0.30 0.02 260);
+  --muted: oklch(0.94 0.005 260);
+  --muted-foreground: oklch(0.50 0.02 260);
+  --accent: oklch(0.95 0.01 25);
+  --accent-foreground: oklch(0.25 0.02 260);
+  --destructive: oklch(0.55 0.22 25);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(0.90 0.005 260);
+  --input: oklch(0.92 0.005 260);
+  --ring: oklch(0.50 0.22 25);
+  --sidebar: oklch(0.98 0.003 260);
+  --sidebar-foreground: oklch(0.18 0.02 260);
+  --sidebar-accent: oklch(0.95 0.01 25);
+  --sidebar-accent-foreground: oklch(0.25 0.02 260);
+  --sidebar-border: oklch(0.90 0.005 260);
+  --sidebar-ring: oklch(0.50 0.22 25);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Noto Sans SC', sans-serif;
+  }
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  [type="button"]:not(:disabled),
+  [type="submit"]:not(:disabled),
+  [type="reset"]:not(:disabled),
+  a[href],
+  select:not(:disabled),
+  input[type="checkbox"]:not(:disabled),
+  input[type="radio"]:not(:disabled) {
+    @apply cursor-pointer;
+  }
+}
+
+@layer components {
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .flex {
+    min-height: 0;
+    min-width: 0;
+  }
+
+  @media (min-width: 640px) {
+    .container {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container {
+      padding-left: 2rem;
+      padding-right: 2rem;
+      max-width: 1280px;
+    }
+  }
+}
+
+/* Custom scrollbar - light theme */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: oklch(0.95 0.005 260);
+}
+::-webkit-scrollbar-thumb {
+  background: oklch(0.80 0.01 260);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: oklch(0.50 0.22 25);
+}
+
+/* Leaflet overrides for light theme */
+.leaflet-container {
+  background: #F5F0EB !important;
+}
+.leaflet-control-zoom a {
+  background: oklch(1 0 0) !important;
+  color: oklch(0.30 0.02 260) !important;
+  border-color: oklch(0.88 0.005 260) !important;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08) !important;
+}
+.leaflet-control-zoom a:hover {
+  background: oklch(0.97 0.005 260) !important;
+  color: oklch(0.50 0.22 25) !important;
+}
+.leaflet-control-attribution {
+  display: none !important;
+}
+
+/* Custom marker styles for light theme */
+.custom-marker {
+  background: transparent !important;
+  border: none !important;
+}
+
+/* City label styles */
+.city-label {
+  background: transparent !important;
+  border: none !important;
+  pointer-events: none !important;
+}
+
+/* Leaflet path hover transition */
+.leaflet-interactive {
+  transition: fill-opacity 0.3s ease, stroke-width 0.3s ease, stroke-opacity 0.3s ease;
+}
+
+/* Pulse animation for map markers */
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.8);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+@keyframes stamp-in {
+  0% {
+    transform: scale(2) rotate(-15deg);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(0.9) rotate(2deg);
+    opacity: 1;
+  }
+  80% {
+    transform: scale(1.05) rotate(-1deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+.animate-stamp {
+  animation: stamp-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes brush-stroke {
+  0% {
+    clip-path: inset(0 100% 0 0);
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+.animate-brush {
+  animation: brush-stroke 0.8s ease-out forwards;
+}
+
+@keyframes float-up {
+  0% {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-float-up {
+  animation: float-up 0.6s ease-out forwards;
+}
