@@ -1,3 +1,5 @@
+import { assetPath } from '@/lib/sitePaths';
+
 export type FeatureTeam = {
   id: string;
   city: string;
@@ -540,4 +542,4 @@ export const moduleStats = [
   { label: '服务图层', value: '6' },
 ];
 
-export const projectLogo = '/assets/xiangchao-logo.png';
+export const projectLogo = assetPath('/assets/xiangchao-logo.png');
