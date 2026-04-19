@@ -8,16 +8,16 @@ import Landing from "./pages/Landing";
 import Home from "./pages/Home";
 import FeatureModules from "./pages/FeatureModules";
 import H5Experience from "./pages/H5Experience";
-
+import { routePath } from "./lib/sitePaths";
 
 function Router() {
   return (
     <Switch>
-      <Route path={"/"} component={Landing} />
-      <Route path={"/map"} component={Home} />
-      <Route path={"/modules"} component={FeatureModules} />
-      <Route path={"/h5"} component={H5Experience} />
-      <Route path={"/404"} component={NotFound} />
+      <Route path={routePath("/")} component={Landing} />
+      <Route path={routePath("/map")} component={Home} />
+      <Route path={routePath("/modules")} component={FeatureModules} />
+      <Route path={routePath("/h5")} component={H5Experience} />
+      <Route path={routePath("/404")} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
     </Switch>

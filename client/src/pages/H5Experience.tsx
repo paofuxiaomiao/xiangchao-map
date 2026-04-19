@@ -26,6 +26,7 @@ import {
   type PoiLayer,
 } from '@/data/feature-data';
 import { cityGeoData, hunanOutline } from '@/data/hunan-geo';
+import { assetPath, routePath } from '@/lib/sitePaths';
 
 const HERO_IMG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663486523138/6NztyHB5jaNJh8ykWoD3oc/landing-hero-LFmanHYhXsky4PD5ZGP4s4.webp';
 const ACTION_IMG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663486523138/6NztyHB5jaNJh8ykWoD3oc/landing-action-GNWSyNsvVaYp6kQGdW67Yy.webp';
@@ -156,7 +157,7 @@ export default function H5Experience() {
       </div>
 
       <div className="absolute left-4 right-4 top-4 z-40 flex items-center justify-between gap-3 lg:left-8 lg:right-8 lg:top-6">
-        <Link href="/">
+        <Link href={routePath('/')}>
           <div className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-black/35 text-white backdrop-blur-md">
             <ArrowLeft className="h-4 w-4" />
           </div>
@@ -171,7 +172,7 @@ export default function H5Experience() {
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(229,57,53,0.24),transparent_40%),radial-gradient(circle_at_bottom_right,rgba(255,193,7,0.20),transparent_30%)]" />
           <div className="relative z-10 mx-auto max-w-sm text-center lg:max-w-2xl">
             <div className="mx-auto flex h-28 w-28 items-center justify-center rounded-[32px] border border-white/12 bg-white/10 backdrop-blur-2xl shadow-[0_24px_60px_rgba(0,0,0,0.35)]">
-              <img src="/assets/xiangchao-logo.png" alt="湘超 LOGO" className="h-20 w-20 object-contain" />
+              <img src={assetPath('/assets/xiangchao-logo.png')} alt="湘超 LOGO" className="h-20 w-20 object-contain" />
             </div>
             <div className="mt-8 text-xs tracking-[0.4em] text-white/55">LOADING H5 EXPERIENCE</div>
               <h1 className="mt-4 text-4xl font-black leading-tight lg:text-6xl" style={{ fontFamily: "'Noto Serif SC', serif" }}>
@@ -222,7 +223,7 @@ export default function H5Experience() {
                 <div className="text-xs tracking-[0.24em] text-white/55">PAGE 03</div>
                 <h3 className="mt-1 text-2xl font-black" style={{ fontFamily: "'Noto Serif SC', serif" }}>湘超一张图</h3>
               </div>
-              <img src="/assets/xiangchao-logo.png" alt="湘超 LOGO" className="h-10 w-10 rounded-2xl bg-white/10 p-1.5" />
+              <img src={assetPath('/assets/xiangchao-logo.png')} alt="湘超 LOGO" className="h-10 w-10 rounded-2xl bg-white/10 p-1.5" />
             </div>
 
             <div className="mt-4 flex flex-wrap gap-2">
@@ -519,7 +520,7 @@ export default function H5Experience() {
 
             <div className="mt-4 flex items-center justify-between gap-2 rounded-full bg-[oklch(0.97_0.003_260)] px-4 py-3 text-sm text-[oklch(0.45_0.02_260)]">
               <span>H5 体验已完成</span>
-              <Link href="/modules">
+              <Link href={routePath('/modules')}>
                 <span className="font-semibold text-[#D32F2F]">查看完整模块页</span>
               </Link>
             </div>

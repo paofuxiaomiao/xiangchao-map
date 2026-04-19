@@ -19,6 +19,7 @@ import StatsBar from '@/components/StatsBar';
 import LogoBadge from '@/components/LogoBadge';
 import { teams, type Team, HERO_BANNER, leagueStats } from '@/data/teams';
 import { Trophy, Map, ArrowLeft } from 'lucide-react';
+import { assetPath, routePath } from '@/lib/sitePaths';
 
 export default function Home() {
   const [selectedTeam, setSelectedTeam] = useState<Team | null>(null);
@@ -79,7 +80,7 @@ export default function Home() {
           {/* Left: Title */}
           <div className="flex items-center gap-4">
             {/* Back to Landing */}
-            <Link href="/">
+            <Link href={routePath('/')}>
               <motion.div
                 whileHover={{ x: -3 }}
                 className="w-9 h-9 rounded-lg flex items-center justify-center bg-white/10 hover:bg-white/20 border border-white/15 transition-colors"
@@ -102,7 +103,7 @@ export default function Home() {
                   border: '1.5px solid rgba(255,255,255,0.25)',
                 }}
               >
-                <img src="/assets/xiangchao-logo.png" alt="湘超 LOGO" className="w-7 h-7 object-contain" />
+                <img src={assetPath('/assets/xiangchao-logo.png')} alt="湘超 LOGO" className="w-7 h-7 object-contain" />
                 <div className="absolute inset-[3px] border border-white/10 rounded-[1px]" />
               </div>
               {/* Outer seal corner marks */}
@@ -158,12 +159,12 @@ export default function Home() {
 
           {/* Right: Stats */}
           <div className="hidden lg:flex items-center gap-3">
-            <Link href="/modules">
+            <Link href={routePath('/modules')}>
               <div className="rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm text-white/88 backdrop-blur-md transition hover:bg-white/15">
                 功能模块
               </div>
             </Link>
-            <Link href="/h5">
+            <Link href={routePath('/h5')}>
               <div className="rounded-full border border-white/15 bg-black/20 px-4 py-2 text-sm text-white/88 backdrop-blur-md transition hover:bg-black/30">
                 H5
               </div>
@@ -295,10 +296,10 @@ export default function Home() {
         <div className="mb-2 flex items-center justify-between gap-3">
           <LogoBadge compact subtitle="已接入官方 LOGO" />
           <div className="flex items-center gap-2">
-            <Link href="/modules">
+            <Link href={routePath('/modules')}>
               <div className="rounded-full bg-[oklch(0.97_0.003_260)] px-3 py-1.5 text-xs font-medium text-[oklch(0.35_0.02_260)]">模块</div>
             </Link>
-            <Link href="/h5">
+            <Link href={routePath('/h5')}>
               <div className="rounded-full bg-[#D32F2F] px-3 py-1.5 text-xs font-medium text-white">H5</div>
             </Link>
           </div>

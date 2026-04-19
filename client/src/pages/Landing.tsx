@@ -16,6 +16,7 @@ import { useLocation } from 'wouter';
 import { teams, leagueStats } from '@/data/teams';
 import LogoBadge from '@/components/LogoBadge';
 import { MapPin, Trophy, Flame, ChevronDown, ArrowRight, Users, Timer, TrendingUp, Zap, Star } from 'lucide-react';
+import { routePath } from '@/lib/sitePaths';
 
 // CDN image URLs
 const HERO_IMG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663486523138/6NztyHB5jaNJh8ykWoD3oc/landing-hero-LFmanHYhXsky4PD5ZGP4s4.webp';
@@ -78,15 +79,15 @@ export default function Landing() {
   }, []);
 
   const handleEnterMap = () => {
-    setLocation('/map');
+    setLocation(routePath('/map'));
   };
 
   const handleOpenModules = () => {
-    setLocation('/modules');
+    setLocation(routePath('/modules'));
   };
 
   const handleOpenH5 = () => {
-    setLocation('/h5');
+    setLocation(routePath('/h5'));
   };
 
   return (

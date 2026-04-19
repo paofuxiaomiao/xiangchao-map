@@ -12,6 +12,7 @@ import {
   Vote,
 } from 'lucide-react';
 import LogoBadge from '@/components/LogoBadge';
+import { routePath } from '@/lib/sitePaths';
 import {
   featureTeams,
   initialFanMessages,
@@ -109,7 +110,7 @@ export default function FeatureModules() {
         <div className="relative mx-auto max-w-7xl px-4 py-5 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between gap-4">
             <div className="flex items-center gap-4">
-              <Link href="/">
+              <Link href={routePath('/')}>
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/20 bg-white/10 text-white transition hover:bg-white/15">
                   <ArrowLeft className="h-4 w-4" />
                 </div>
@@ -118,12 +119,12 @@ export default function FeatureModules() {
             </div>
 
             <div className="hidden items-center gap-2 md:flex">
-              <Link href="/map">
+              <Link href={routePath('/map')}>
                 <div className="rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm text-white/90 backdrop-blur-md transition hover:bg-white/15">
                   返回地图
                 </div>
               </Link>
-              <Link href="/h5">
+              <Link href={routePath('/h5')}>
                 <div className="rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm text-white/90 backdrop-blur-md transition hover:bg-white/15">
                   查看 H5
                 </div>
