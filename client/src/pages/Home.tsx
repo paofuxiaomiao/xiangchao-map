@@ -256,27 +256,6 @@ export default function Home() {
 
           {/* Map control buttons - ABOVE TeamDetail in z-index */}
           <div className="absolute top-4 right-4 z-[1100] flex items-center gap-2">
-            {/* 3D Satellite toggle button - only show when team selected and NOT in 3D */}
-            <AnimatePresence>
-              {selectedTeam && !show3D && (
-                <motion.button
-                  initial={{ scale: 0, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  exit={{ scale: 0, opacity: 0 }}
-                  transition={{ type: 'spring', damping: 15 }}
-                  onClick={handleToggle3D}
-                  className="flex items-center gap-2 bg-gradient-to-r from-[#D32F2F] to-[#E53935] hover:from-[#C62828] hover:to-[#D32F2F] text-white px-4 py-2.5 rounded-xl text-sm font-bold transition-all shadow-lg shadow-[#D32F2F]/25 hover:shadow-xl hover:shadow-[#D32F2F]/30 border border-white/15 group"
-                  style={{ fontFamily: "'Noto Sans SC', sans-serif" }}
-                >
-                  <svg className="w-4 h-4 group-hover:rotate-12 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  实景三维
-                  <span className="text-[9px] bg-white/20 px-1.5 py-0.5 rounded-md ml-0.5">3D</span>
-                </motion.button>
-              )}
-            </AnimatePresence>
-
             {/* Reset view button */}
             <button
               onClick={handleResetView}
