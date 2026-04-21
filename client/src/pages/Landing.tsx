@@ -82,8 +82,9 @@ export default function Landing() {
     setLocation(routePath('/map'));
   };
 
-  const handleOpenModules = () => {
-    setLocation(routePath('/modules'));
+  const handleOpenModules = (view?: 'dashboard' | 'interactive' | 'culture') => {
+    const base = routePath('/modules');
+    setLocation(view ? `${base}?view=${view}` : base);
   };
 
   const handleOpenH5 = () => {
@@ -226,11 +227,32 @@ export default function Landing() {
 
                   <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
                     <button
-                      onClick={handleOpenModules}
+                      onClick={() => handleOpenModules()}
                       className="rounded-full border border-white/15 bg-white/10 px-6 py-3 text-sm font-medium text-white/88 backdrop-blur-md transition-all duration-300 hover:bg-white/15"
                       style={{ fontFamily: "'Noto Sans SC', sans-serif" }}
                     >
-                      查看功能模块
+                      查看功能模块总览
+                    </button>
+                    <button
+                      onClick={() => handleOpenModules('dashboard')}
+                      className="rounded-full border border-white/15 bg-black/25 px-6 py-3 text-sm font-medium text-white/88 backdrop-blur-md transition-all duration-300 hover:bg-black/35"
+                      style={{ fontFamily: "'Noto Sans SC', sans-serif" }}
+                    >
+                      直达数字看板
+                    </button>
+                    <button
+                      onClick={() => handleOpenModules('interactive')}
+                      className="rounded-full border border-white/15 bg-black/25 px-6 py-3 text-sm font-medium text-white/88 backdrop-blur-md transition-all duration-300 hover:bg-black/35"
+                      style={{ fontFamily: "'Noto Sans SC', sans-serif" }}
+                    >
+                      直达互动中心
+                    </button>
+                    <button
+                      onClick={() => handleOpenModules('culture')}
+                      className="rounded-full border border-white/15 bg-black/25 px-6 py-3 text-sm font-medium text-white/88 backdrop-blur-md transition-all duration-300 hover:bg-black/35"
+                      style={{ fontFamily: "'Noto Sans SC', sans-serif" }}
+                    >
+                      直达主场文化
                     </button>
                     <button
                       onClick={handleOpenH5}

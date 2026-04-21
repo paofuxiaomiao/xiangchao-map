@@ -535,11 +535,437 @@ export const h5Pois: H5Poi[] = [
   },
 ];
 
+export type TeamCoachProfile = {
+  name: string;
+  title: string;
+  style: string;
+  note: string;
+};
+
+export type TeamPlayerProfile = {
+  id: string;
+  name: string;
+  jerseyNumber: string;
+  position: string;
+  height: string;
+  weight: string;
+  contribution: string;
+  goals: number;
+  ratingBase: number;
+  dataStatus?: string;
+};
+
+export type TeamDashboardProfile = {
+  rosterSize: string;
+  averageHeight: string;
+  averageWeight: string;
+  pointsLabel: string;
+  scoringLeader: string;
+  coach: TeamCoachProfile;
+  players: TeamPlayerProfile[];
+  dataStatus: string;
+};
+
+export type LeagueLeader = {
+  title: string;
+  value: string;
+  detail: string;
+  accent: string;
+};
+
+export type TeamCultureProfile = {
+  title: string;
+  culturalAnchor: string;
+  culturalStory: string;
+  cheerSquad: string;
+  supporterGroup: string;
+  rituals: string[];
+  bannerSamples: string[];
+  cheerTemplates: string[];
+};
+
+const dashboardProfileOverrides: Partial<Record<FeatureTeam['id'], TeamDashboardProfile>> = {
+  changsha: {
+    rosterSize: '45 人名单框架',
+    averageHeight: '178cm（示意）',
+    averageWeight: '72kg（示意）',
+    pointsLabel: '常规赛积分 35',
+    scoringLeader: '李章毓 · 前场核心',
+    coach: {
+      name: '王凌波',
+      title: '主教练',
+      style: '强调压迫节奏与整体推进',
+      note: '公开报道已出现主教练与大名单线索，详细球员资料适合后续持续补全。',
+    },
+    players: [
+      {
+        id: 'changsha-core-1',
+        name: '李章毓',
+        jerseyNumber: '10',
+        position: '前场组织',
+        height: '180cm',
+        weight: '73kg',
+        contribution: '承担前场串联与关键一传，适合作为球员热度榜样本。',
+        goals: 6,
+        ratingBase: 4.6,
+      },
+      {
+        id: 'changsha-core-2',
+        name: '周琛崴',
+        jerseyNumber: '8',
+        position: '中场队长',
+        height: '178cm',
+        weight: '71kg',
+        contribution: '代表球队精神属性，适合承接球迷打分与赛前打气内容。',
+        goals: 3,
+        ratingBase: 4.4,
+      },
+      {
+        id: 'changsha-core-3',
+        name: '门将位档案',
+        jerseyNumber: '1',
+        position: '守门员',
+        height: '186cm',
+        weight: '79kg',
+        contribution: '当前用于演示防线档案位，待接入更多公开资料后替换。',
+        goals: 0,
+        ratingBase: 4.2,
+        dataStatus: '公开资料补充中',
+      },
+    ],
+    dataStatus: '主教练与部分球员线索已公开，更多人员指标可继续补录。',
+  },
+  zhuzhou: {
+    rosterSize: '42 人阵容池',
+    averageHeight: '179cm（示意）',
+    averageWeight: '73kg（示意）',
+    pointsLabel: '常规赛积分 27',
+    scoringLeader: '锋线火力组 · 进球 27',
+    coach: {
+      name: '动力教练组',
+      title: '战术团队',
+      style: '重视转换速度与边路纵深',
+      note: '株洲适合把工业速度感与炎帝火种文化并置呈现。',
+    },
+    players: [
+      {
+        id: 'zhuzhou-core-1',
+        name: '9号锋线位',
+        jerseyNumber: '9',
+        position: '中锋',
+        height: '183cm',
+        weight: '78kg',
+        contribution: '承担抢点与冲击任务，适合配合“火力值”展示。',
+        goals: 8,
+        ratingBase: 4.5,
+        dataStatus: '公开姓名待补充',
+      },
+      {
+        id: 'zhuzhou-core-2',
+        name: '7号边锋位',
+        jerseyNumber: '7',
+        position: '边路突击',
+        height: '176cm',
+        weight: '69kg',
+        contribution: '对应球队高速推进的边路特征。',
+        goals: 6,
+        ratingBase: 4.3,
+        dataStatus: '公开姓名待补充',
+      },
+      {
+        id: 'zhuzhou-core-3',
+        name: '4号后防位',
+        jerseyNumber: '4',
+        position: '中卫',
+        height: '185cm',
+        weight: '80kg',
+        contribution: '对应球队攻守转换中的支点角色。',
+        goals: 1,
+        ratingBase: 4.1,
+        dataStatus: '公开姓名待补充',
+      },
+    ],
+    dataStatus: '现阶段重点展示位置档案与风格标签，后续可替换成实名阵容。',
+  },
+  hengyang: {
+    rosterSize: '40 人主场名单',
+    averageHeight: '177cm（示意）',
+    averageWeight: '71kg（示意）',
+    pointsLabel: '常规赛积分 20',
+    scoringLeader: '进攻火力组 · 进球 24',
+    coach: {
+      name: '雁城教练组',
+      title: '战术团队',
+      style: '偏重前场冲击与转换速度',
+      note: '衡阳目前更适合用球队风格与主场氛围先承接球员互动功能。',
+    },
+    players: [
+      {
+        id: 'hengyang-core-1',
+        name: '10号前腰位',
+        jerseyNumber: '10',
+        position: '前腰',
+        height: '179cm',
+        weight: '72kg',
+        contribution: '负责串联与远射，适合作为球迷评分入口。',
+        goals: 5,
+        ratingBase: 4.3,
+        dataStatus: '公开姓名待补充',
+      },
+      {
+        id: 'hengyang-core-2',
+        name: '11号边锋位',
+        jerseyNumber: '11',
+        position: '边锋',
+        height: '175cm',
+        weight: '68kg',
+        contribution: '对应衡阳前场速度点。',
+        goals: 4,
+        ratingBase: 4.2,
+        dataStatus: '公开姓名待补充',
+      },
+      {
+        id: 'hengyang-core-3',
+        name: '1号门将位',
+        jerseyNumber: '1',
+        position: '守门员',
+        height: '186cm',
+        weight: '81kg',
+        contribution: '用于承接防守表现与扑救点评。',
+        goals: 0,
+        ratingBase: 4.1,
+        dataStatus: '公开姓名待补充',
+      },
+    ],
+    dataStatus: '当前以主场观感和位置档案为主，适合后续补充实名球员数据。',
+  },
+  yongzhou: {
+    rosterSize: '41 人冠军班底',
+    averageHeight: '178cm（示意）',
+    averageWeight: '72kg（示意）',
+    pointsLabel: '冠军队伍 · 22 分',
+    scoringLeader: '高响 · 关键球员',
+    coach: {
+      name: '黄楚儒',
+      title: '主教练',
+      style: '强调韧性与高效防守反击',
+      note: '冠军气质与舜帝文化可以共同构成永州队的内容核心。',
+    },
+    players: [
+      {
+        id: 'yongzhou-core-1',
+        name: '高响',
+        jerseyNumber: '10',
+        position: '进攻核心',
+        height: '181cm',
+        weight: '74kg',
+        contribution: '适合作为最佳球员档案与高光片段联动。',
+        goals: 7,
+        ratingBase: 4.8,
+      },
+      {
+        id: 'yongzhou-core-2',
+        name: '唐嘉年',
+        jerseyNumber: '1',
+        position: '守门员',
+        height: '187cm',
+        weight: '82kg',
+        contribution: '适合承接门将评分、扑救高光与战报内容。',
+        goals: 0,
+        ratingBase: 4.7,
+      },
+      {
+        id: 'yongzhou-core-3',
+        name: '冠军中轴位',
+        jerseyNumber: '6',
+        position: '后腰',
+        height: '179cm',
+        weight: '73kg',
+        contribution: '用于承接冠军队体系表达与位置说明。',
+        goals: 2,
+        ratingBase: 4.3,
+        dataStatus: '公开姓名待补充',
+      },
+    ],
+    dataStatus: '冠军队公开人物线索较多，适合作为人物看板优先完善对象。',
+  },
+};
+
+const cultureProfileOverrides: Partial<Record<FeatureTeam['id'], TeamCultureProfile>> = {
+  zhuzhou: {
+    title: '炎帝火种 × 动力之都',
+    culturalAnchor: '以炎帝文化为源头叙事，把火种、祭典与工业速度感融合为球队识别。',
+    culturalStory: '株洲既有火车头工业城市的速度感，也有炎帝陵所承载的寻根祭祖精神，适合做成“火种不熄、动力不止”的主场文化主线。',
+    cheerSquad: '炎火啦啦队',
+    supporterGroup: '动力红看台',
+    rituals: ['开赛前火种口号齐喊', '进球后看台挥动红橙旗阵', '中场进行炎帝主题互动口号接龙'],
+    bannerSamples: ['炎帝火种，点燃株洲主场', '动力之都，全速前进', '火车头已出站，看台跟上节奏'],
+    cheerTemplates: ['株洲冲起来', '炎帝火种继续燃', '动力主场压上去'],
+  },
+  yongzhou: {
+    title: '舜德九嶷 × 冠军之城',
+    culturalAnchor: '以舜帝文化与九嶷山精神强化永州队的冠军叙事与文明气质。',
+    culturalStory: '永州不仅有冠军逆袭的竞技故事，还可以借由舜帝文化延展出“德、礼、韧性、根脉”的更厚城市表达，让冠军气质不只是比分结果。',
+    cheerSquad: '九嶷助威团',
+    supporterGroup: '舜风红看台',
+    rituals: ['入场播放九嶷主题视觉片', '看台统一举起冠军红巾', '赛后进行冠军口号大合唱'],
+    bannerSamples: ['九嶷山下，冠军回响', '舜德之城，为荣誉而战', '永州不吹牛，只用胜利说话'],
+    cheerTemplates: ['永州继续冲', '冠军气势拉满', '九嶷红浪站起来'],
+  },
+  shaoyang: {
+    title: '宝庆竹韵 × 坚韧看台',
+    culturalAnchor: '把宝庆竹刻非遗转化为主场纹样与球迷横幅语言。',
+    culturalStory: '邵阳适合把非遗竹刻的刀锋感、线条感与球队的坚韧球风结合起来，让文化符号直接进入球迷视觉系统。',
+    cheerSquad: '竹韵啦啦队',
+    supporterGroup: '宝庆坚守团',
+    rituals: ['竹纹围巾统一挥舞', '赛前展示非遗图腾横幅', '主场进球后进行节奏敲击'],
+    bannerSamples: ['宝庆竹韵，越战越硬', '邵阳就是不服输', '竹刻锋芒，写在看台上'],
+    cheerTemplates: ['邵阳顶住', '宝庆竹韵喊起来', '全场一起硬起来'],
+  },
+  yueyang: {
+    title: '洞庭江湖 × 忧乐主场',
+    culturalAnchor: '把洞庭湖与岳阳楼精神转化为球队的气质语言。',
+    culturalStory: '岳阳适合从江湖水纹、楼阁轮廓和“先忧后乐”的城市精神里提炼出更沉稳的球迷文化。',
+    cheerSquad: '洞庭浪潮啦啦队',
+    supporterGroup: '岳阳楼看台',
+    rituals: ['赛前蓝绿旗浪联动', '中场进行楼影灯牌展示', '终场统一高喊先忧后乐'],
+    bannerSamples: ['洞庭起浪，岳阳开场', '先忧后乐，拼到最后', '岳阳楼上看你赢球'],
+    cheerTemplates: ['岳阳守住', '洞庭浪潮起来', '主场氛围给满'],
+  },
+  xiangxi: {
+    title: '苗鼓山门 × 热血看台',
+    culturalAnchor: '将苗绣、山门、鼓点和民族仪式感转成主场记忆。',
+    culturalStory: '湘西天然适合做出强辨识度的主场文化模块，鼓点、服饰、口号和山地地貌都可以成为视觉语言。',
+    cheerSquad: '苗鼓啦啦队',
+    supporterGroup: '山门远征团',
+    rituals: ['赛前鼓点开场', '民族纹样围巾联动', '看台口号与鼓点节拍同步'],
+    bannerSamples: ['山门已开，湘西开冲', '鼓点一响，全场起浪', '湘西看台，自带热血'],
+    cheerTemplates: ['湘西鼓起来', '山门主场顶住', '一起把节奏打出来'],
+  },
+  hengyang: {
+    title: '雁城衡州 × 南岳气场',
+    culturalAnchor: '把雁城意象、南岳人文与主场气场融合成移动端也容易感知的城市标签。',
+    culturalStory: '衡阳队适合强化“雁城高飞”的视觉隐喻，结合南岳文化、城市门楼与主场助威节奏，形成更立体的球队记忆。',
+    cheerSquad: '雁鸣啦啦队',
+    supporterGroup: '衡州远征社',
+    rituals: ['进场前雁阵灯牌亮相', '关键回合全场齐喊雁城雄飞', '赛后球迷区进行合照打卡'],
+    bannerSamples: ['雁城雄飞，主场抬头', '南岳在望，衡阳向上', '衡州一声喊，整场都热'],
+    cheerTemplates: ['衡阳雄起', '雁城一起飞', '主场别松劲'],
+  },
+};
+
+export const leagueLeaders: LeagueLeader[] = [
+  {
+    title: '冠军队伍',
+    value: '永州队',
+    detail: '以黑马姿态完成逆袭，适合作为人物与主场荣誉叙事入口。',
+    accent: '#E63B2E',
+  },
+  {
+    title: '最佳射手',
+    value: '赵文荻',
+    detail: '可扩展为射手榜与球员热度榜的联动入口。',
+    accent: '#FFB300',
+  },
+  {
+    title: '最佳球员',
+    value: '高响',
+    detail: '适合作为球员评分、精彩时刻和海报展示的首批样本。',
+    accent: '#D32F2F',
+  },
+  {
+    title: '最佳门将',
+    value: '唐嘉年',
+    detail: '可以引出扑救榜、零封榜与门将评价模块。',
+    accent: '#1976D2',
+  },
+];
+
+function buildFallbackDashboardProfile(team: FeatureTeam): TeamDashboardProfile {
+  return {
+    rosterSize: '阵容资料持续补充',
+    averageHeight: '178cm（示意）',
+    averageWeight: '72kg（示意）',
+    pointsLabel: team.lastSeasonRecord,
+    scoringLeader: '核心球员资料补录中',
+    coach: {
+      name: `${team.city}教练组`,
+      title: '战术团队',
+      style: '围绕城市风格构建比赛节奏与主场气质',
+      note: '当前版本优先完成功能结构与展示方式，实名资料可后续替换。',
+    },
+    players: [
+      {
+        id: `${team.id}-squad-1`,
+        name: '9号锋线位',
+        jerseyNumber: '9',
+        position: '锋线',
+        height: '182cm',
+        weight: '76kg',
+        contribution: '承担终结与冲击职责，用于展示球员档案卡结构。',
+        goals: 5,
+        ratingBase: 4.2,
+        dataStatus: '公开姓名待补充',
+      },
+      {
+        id: `${team.id}-squad-2`,
+        name: '8号中场位',
+        jerseyNumber: '8',
+        position: '中场',
+        height: '178cm',
+        weight: '71kg',
+        contribution: '承担串联与节奏控制，用于展示评分和留言联动。',
+        goals: 3,
+        ratingBase: 4.1,
+        dataStatus: '公开姓名待补充',
+      },
+      {
+        id: `${team.id}-squad-3`,
+        name: '1号门将位',
+        jerseyNumber: '1',
+        position: '守门员',
+        height: '186cm',
+        weight: '80kg',
+        contribution: '承担防线组织与扑救表现展示。',
+        goals: 0,
+        ratingBase: 4.0,
+        dataStatus: '公开姓名待补充',
+      },
+    ],
+    dataStatus: '当前以结构示意与球队风格为主，人员公开资料可继续补充。',
+  };
+}
+
+function buildFallbackCultureProfile(team: FeatureTeam): TeamCultureProfile {
+  return {
+    title: `${team.city}主场文化提案`,
+    culturalAnchor: team.badgeDesc,
+    culturalStory: `${team.story} 页面里建议把城市文化、队徽解读与球迷看台放在同一组内容中呈现，形成更完整的球队识别。`,
+    cheerSquad: `${team.city}啦啦队`,
+    supporterGroup: `${team.city}主场看台`,
+    rituals: ['赛前口号点火', '进球后旗阵联动', '赛后主场合唱'],
+    bannerSamples: [`${team.teamName}主场开场就要热`, `${team.slogan}`, `${team.city}球迷今天继续顶满`],
+    cheerTemplates: [`${team.teamName}加油`, `${team.city}把节奏拉起来`, '把主场气势顶上去'],
+  };
+}
+
+export function getTeamDashboardProfile(teamId: FeatureTeam['id']) {
+  const team = featureTeams.find((item) => item.id === teamId);
+  if (!team) return buildFallbackDashboardProfile(featureTeams[0]);
+  return dashboardProfileOverrides[teamId] ?? buildFallbackDashboardProfile(team);
+}
+
+export function getTeamCultureProfile(teamId: FeatureTeam['id']) {
+  const team = featureTeams.find((item) => item.id === teamId);
+  if (!team) return buildFallbackCultureProfile(featureTeams[0]);
+  return cultureProfileOverrides[teamId] ?? buildFallbackCultureProfile(team);
+}
+
 export const moduleStats = [
   { label: '覆盖球队', value: '14' },
-  { label: '功能模块', value: '3' },
-  { label: 'H5 页面', value: '6' },
-  { label: '服务图层', value: '6' },
+  { label: '功能模块', value: '6' },
+  { label: '互动入口', value: '4' },
+  { label: '文化模块', value: '3' },
 ];
 
 export const projectLogo = projectLogoUrl;
