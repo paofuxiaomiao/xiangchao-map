@@ -940,7 +940,7 @@ function buildFallbackCultureProfile(team: FeatureTeam): TeamCultureProfile {
   return {
     title: `${team.city}主场文化`,
     culturalAnchor: team.badgeDesc,
-    culturalStory: `${team.story} 主场文化还串联了队徽意象、看台口号与球迷组织，方便快速了解这支球队的城市气质。`,
+    culturalStory: `${team.story} 队徽意象、看台口号与球迷组织共同构成了这支球队鲜明的城市气质。`,
     cheerSquad: `${team.city}啦啦队`,
     supporterGroup: `${team.city}主场看台`,
     rituals: ['赛前口号点火', '进球后旗阵联动', '赛后主场合唱'],

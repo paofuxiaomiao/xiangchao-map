@@ -218,7 +218,7 @@ export default function FeatureModules() {
       {
         title: '啦啦队',
         value: activeCulture.cheerSquad,
-        helper: '主场秩序与看台节奏的组织主体。',
+        helper: '负责带动赛前热场与看台助威节奏。',
       },
       {
         title: '粉丝队',
