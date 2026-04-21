@@ -204,16 +204,15 @@ export default function FeatureModules() {
 
               <div className="mt-5 inline-flex items-center gap-2 rounded-full border border-[#D32F2F]/10 bg-[#D32F2F]/[0.05] px-4 py-2 text-xs uppercase tracking-[0.24em] text-[#D32F2F]">
                 <Sparkles className="h-3.5 w-3.5" />
-                Modules Re-architecture
+                湘超球队主题中心
               </div>
 
               <h1 className="mt-4 text-3xl font-black leading-tight text-[oklch(0.18_0.02_260)] sm:text-5xl" style={{ fontFamily: "'Noto Serif SC', serif" }}>
-                把功能做多，
-                <span className="bg-gradient-to-r from-[#D32F2F] via-[#E53935] to-[#FF8A65] bg-clip-text text-transparent"> 但不堆在同一屏</span>
+                一站看懂球队实力、
+                <span className="bg-gradient-to-r from-[#D32F2F] via-[#E53935] to-[#FF8A65] bg-clip-text text-transparent"> 主场氛围与球迷热度</span>
               </h1>
               <p className="mt-4 max-w-2xl text-sm leading-7 text-[oklch(0.45_0.02_260)] sm:text-base">
-                本轮把页面重构为 <strong>数字看板、互动中心、主场文化</strong> 三个主视图，并让所有功能围绕当前球队联动。
-                这样用户先选球队，再进模块，避免在一屏里同时面对积分、评论、文化、横幅和打分造成的认知拥挤。
+                在这里可以围绕当前球队查看 <strong>数字看板、互动中心、主场文化</strong> 三类内容，既能快速了解积分与阵容，也能继续浏览球迷声音、主场故事与城市特色。
               </p>
             </div>
 
@@ -251,7 +250,7 @@ export default function FeatureModules() {
                       <Icon className="h-5 w-5" />
                     </div>
                     <div>
-                      <div className={`text-xs uppercase tracking-[0.2em] ${isActive ? 'text-white/70' : 'text-[oklch(0.55_0.02_260)]'}`}>Quick Entry</div>
+                      <div className={`text-xs uppercase tracking-[0.2em] ${isActive ? 'text-white/70' : 'text-[oklch(0.55_0.02_260)]'}`}>功能入口</div>
                       <div className="mt-1 text-xl font-black" style={{ fontFamily: "'Noto Serif SC', serif" }}>{view.label}</div>
                     </div>
                   </div>
@@ -320,7 +319,7 @@ export default function FeatureModules() {
                     <div className="rounded-[28px] border border-white/70 bg-white/80 p-4 text-right shadow-sm">
                       <div className="text-xs uppercase tracking-[0.18em] text-[oklch(0.55_0.02_260)]">球队积分标签</div>
                       <div className="mt-2 text-2xl font-black" style={{ color: activeTeam.color, fontFamily: "'DM Mono', monospace" }}>{activeDashboard.pointsLabel}</div>
-                      <div className="mt-2 text-xs text-[oklch(0.5_0.02_260)]">数据看板优先承接积分、阵容与教练信息，避免和互动区混在一起。</div>
+                      <div className="mt-2 text-xs text-[oklch(0.5_0.02_260)]">结合积分、阵容与教练信息，快速形成对球队状态的整体判断。</div>
                     </div>
                   </div>
 
@@ -338,16 +337,16 @@ export default function FeatureModules() {
                       <Shield className="h-5 w-5" />
                     </div>
                     <div>
-                      <div className="text-xs uppercase tracking-[0.18em] text-[oklch(0.55_0.02_260)]">解耦说明</div>
-                      <h3 className="text-2xl font-black" style={{ fontFamily: "'Noto Serif SC', serif" }}>为什么这样分层</h3>
+                      <div className="text-xs uppercase tracking-[0.18em] text-[oklch(0.55_0.02_260)]">球队观察</div>
+                      <h3 className="text-2xl font-black" style={{ fontFamily: "'Noto Serif SC', serif" }}>球队焦点</h3>
                     </div>
                   </div>
                   <div className="mt-5 space-y-4 text-sm leading-7 text-[oklch(0.45_0.02_260)]">
-                    <p>当前页面功能很多，因此先让用户完成两个动作：<strong>先选球队，再选主视图</strong>。这样一来，用户进入数字看板时只看数据，不会被评论、横幅和打气按钮打断。</p>
-                    <p>看板内部再拆成球队总览、阵容档案、联赛榜单三个子层，适合从“想先看宏观数据”逐步进入“想看具体人物和排行”的使用路径。</p>
+                    <p>{activeTeam.fullName}当前以 <strong>{activeDashboard.pointsLabel}</strong> 作为赛季核心标签，结合主教练风格、阵容厚度与得分重点，能够较快勾勒出球队的竞争力轮廓。</p>
+                    <p>{activeDashboard.coach.name}所代表的战术气质，与 {activeDashboard.scoringLeader} 的前场表现一起，构成了球队在本阶段最值得关注的攻防脉络。</p>
                   </div>
                   <div className="mt-5 rounded-[24px] border border-[oklch(0.92_0.005_260)] bg-[oklch(0.985_0.002_260)] p-4 text-sm leading-7 text-[oklch(0.42_0.02_260)]">
-                    {activeDashboard.coach.note}
+                    {activeDashboard.dataStatus}
                   </div>
                 </div>
               </div>
@@ -503,11 +502,11 @@ export default function FeatureModules() {
                       <Vote className="h-5 w-5" />
                     </div>
                     <div>
-                      <div className="text-xs uppercase tracking-[0.18em] text-[oklch(0.55_0.02_260)]">Interactive 01</div>
+                      <div className="text-xs uppercase tracking-[0.18em] text-[oklch(0.55_0.02_260)]">球迷互动</div>
                       <h2 className="text-2xl font-black" style={{ fontFamily: "'Noto Serif SC', serif" }}>球队热度投票</h2>
                     </div>
                   </div>
-                  <p className="mt-4 text-sm leading-7 text-[oklch(0.45_0.02_260)]">把“球队支持”作为最轻量的互动入口，适合第一次进入页面的用户先表达态度，再继续进入评论、打分和打气。</p>
+                  <p className="mt-4 text-sm leading-7 text-[oklch(0.45_0.02_260)]">为你支持的球队投出一票，实时查看当前人气变化与球迷热度排行。</p>
                   <div className="mt-5 space-y-3">
                     {rankedTeams.slice(0, 6).map((team, index) => (
                       <div key={team.id} className="flex items-center gap-4 rounded-2xl border border-[oklch(0.92_0.005_260)] bg-[oklch(0.985_0.002_260)] p-4">
@@ -554,11 +553,11 @@ export default function FeatureModules() {
                         <Star className="h-5 w-5" />
                       </div>
                       <div>
-                        <div className="text-xs uppercase tracking-[0.18em] text-[oklch(0.55_0.02_260)]">Interactive 02</div>
+                        <div className="text-xs uppercase tracking-[0.18em] text-[oklch(0.55_0.02_260)]">球迷互动</div>
                         <h2 className="text-2xl font-black" style={{ fontFamily: "'Noto Serif SC', serif" }}>球员打分</h2>
                       </div>
                     </div>
-                    <p className="mt-4 text-sm leading-7 text-[oklch(0.45_0.02_260)]">把打分单独放进互动中心，而不是和看板混在一起，这样用户在看完阵容后再评价球员，路径更自然。</p>
+                    <p className="mt-4 text-sm leading-7 text-[oklch(0.45_0.02_260)]">为球员送出你的赛场评分，直观看到当前阵容在球迷视角中的关注度与表现印象。</p>
                     <div className="mt-5 grid gap-4 lg:grid-cols-3">
                       {activeDashboard.players.map((player) => {
                         const ratingMeta = buildPlayerRatingMeta(player, playerRatings[player.id]);
@@ -596,7 +595,7 @@ export default function FeatureModules() {
                           <Megaphone className="h-5 w-5" />
                         </div>
                         <div>
-                          <div className="text-xs uppercase tracking-[0.18em] text-[oklch(0.55_0.02_260)]">Interactive 03</div>
+                          <div className="text-xs uppercase tracking-[0.18em] text-[oklch(0.55_0.02_260)]">球迷互动</div>
                           <h2 className="text-2xl font-black" style={{ fontFamily: "'Noto Serif SC', serif" }}>线上打气</h2>
                         </div>
                       </div>
@@ -629,7 +628,7 @@ export default function FeatureModules() {
                           <Send className="h-5 w-5" />
                         </div>
                         <div>
-                          <div className="text-xs uppercase tracking-[0.18em] text-[oklch(0.55_0.02_260)]">Interactive 04</div>
+                          <div className="text-xs uppercase tracking-[0.18em] text-[oklch(0.55_0.02_260)]">球迷互动</div>
                           <h2 className="text-2xl font-black" style={{ fontFamily: "'Noto Serif SC', serif" }}>比赛评论区</h2>
                         </div>
                       </div>
@@ -730,8 +729,8 @@ export default function FeatureModules() {
                   <InfoCard title="啦啦队" content={activeCulture.cheerSquad} accent={activeTeam.color} />
                   <InfoCard title="粉丝队" content={activeCulture.supporterGroup} accent={activeTeam.color} />
                   <div className="rounded-[28px] border border-[oklch(0.92_0.005_260)] bg-white p-5 shadow-sm">
-                    <div className="text-xs uppercase tracking-[0.18em] text-[oklch(0.55_0.02_260)]">页面策略</div>
-                    <p className="mt-3 text-sm leading-7 text-[oklch(0.42_0.02_260)]">文化内容不再只是球队说明文字，而是被拆成城市锚点、粉丝组织和横幅墙三组内容，保证用户先理解城市，再感受主场氛围。</p>
+                    <div className="text-xs uppercase tracking-[0.18em] text-[oklch(0.55_0.02_260)]">主场导览</div>
+                    <p className="mt-3 text-sm leading-7 text-[oklch(0.42_0.02_260)]">从城市锚点、球迷组织到横幅记忆，这里汇集了最能代表 {activeTeam.city} 主场气质的观赛线索与氛围内容。</p>
                   </div>
                 </div>
               </div>

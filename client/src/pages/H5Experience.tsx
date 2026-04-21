@@ -181,7 +181,7 @@ export default function H5Experience() {
               湘超特色地图
             </h1>
             <p className="mt-4 text-sm leading-7 text-white/72 lg:mx-auto lg:max-w-xl lg:text-base">
-              湖南足球地理信息服务平台 H5 版，保留既有的热烈氛围与运动视觉，只新增信息模块和互动页面，不直接改动原有地图方案。
+              湖南足球地理信息服务平台 H5 版，用更轻量的方式串联球队地图、观赛互动与赛场快讯。
             </p>
             <div className="mt-8 overflow-hidden rounded-full bg-white/10">
               <div className="h-2.5 w-full animate-pulse rounded-full bg-gradient-to-r from-[#FFB300] via-[#FF6B35] to-[#4CAF50]" />
@@ -208,7 +208,7 @@ export default function H5Experience() {
                 湘超地图 H5
               </h2>
               <p className="mt-4 text-sm leading-7 text-white/74">
-                这一版以 H5 叙事方式重组内容，覆盖进度页、封面页、图层地图页、球队风采页、人气投票页与实时战报页，整体视觉继续沿用已审核通过的图片氛围与红金绿色系。
+                从封面导览到图层地图、球队风采、人气投票与实时战报，这里把观赛所需的信息集中在一条连续的浏览路径中。
               </p>
               <button onClick={() => scrollToSection(2)} className="mt-7 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#D32F2F] to-[#FF6B35] px-5 py-3 text-sm font-bold text-white shadow-lg shadow-[#D32F2F]/20">
                 查看核心地图页
@@ -488,7 +488,7 @@ export default function H5Experience() {
                   <img src={ACTION_IMG} alt="湘超比赛氛围图" className="h-32 w-full object-cover lg:h-48" />
                 </div>
                 <div className="rounded-[28px] border border-[oklch(0.92_0.005_260)] bg-[oklch(0.985_0.002_260)] p-4 text-sm leading-7 text-[oklch(0.42_0.02_260)] lg:text-[15px]">
-                  这一页在移动端强调“快速刷战报”，在 PC 端则把氛围图和说明留在左侧，右侧集中浏览更多实时信息，减少长屏挤压。
+                  这里汇集赛况快讯、现场氛围与观赛亮点，方便连续浏览每一轮比赛的核心信息。
                 </div>
               </div>
 
