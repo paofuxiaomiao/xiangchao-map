@@ -595,7 +595,7 @@ const dashboardProfileOverrides: Partial<Record<FeatureTeam['id'], TeamDashboard
       name: '王凌波',
       title: '主教练',
       style: '强调压迫节奏与整体推进',
-      note: '公开报道已出现主教练与大名单线索，详细球员资料适合后续持续补全。',
+      note: '目前已整理主教练与部分名单信息，更多球员资料将持续补充。',
     },
     players: [
       {
@@ -605,7 +605,7 @@ const dashboardProfileOverrides: Partial<Record<FeatureTeam['id'], TeamDashboard
         position: '前场组织',
         height: '180cm',
         weight: '73kg',
-        contribution: '承担前场串联与关键一传，适合作为球员热度榜样本。',
+        contribution: '承担前场串联与关键一传，是长沙队前场推进的重要支点。',
         goals: 6,
         ratingBase: 4.6,
       },
@@ -616,7 +616,7 @@ const dashboardProfileOverrides: Partial<Record<FeatureTeam['id'], TeamDashboard
         position: '中场队长',
         height: '178cm',
         weight: '71kg',
-        contribution: '代表球队精神属性，适合承接球迷打分与赛前打气内容。',
+        contribution: '代表球队精神属性，经常在关键时段稳定中场节奏。',
         goals: 3,
         ratingBase: 4.4,
       },
@@ -627,7 +627,7 @@ const dashboardProfileOverrides: Partial<Record<FeatureTeam['id'], TeamDashboard
         position: '守门员',
         height: '186cm',
         weight: '79kg',
-        contribution: '当前用于演示防线档案位，待接入更多公开资料后替换。',
+        contribution: '承担门前防守与出球任务，更多公开资料将持续补充。',
         goals: 0,
         ratingBase: 4.2,
         dataStatus: '公开资料补充中',
@@ -645,7 +645,7 @@ const dashboardProfileOverrides: Partial<Record<FeatureTeam['id'], TeamDashboard
       name: '动力教练组',
       title: '战术团队',
       style: '重视转换速度与边路纵深',
-      note: '株洲适合把工业速度感与炎帝火种文化并置呈现。',
+      note: '株洲队节奏明快、冲击力强，主场氛围热烈鲜明。',
     },
     players: [
       {
@@ -697,7 +697,7 @@ const dashboardProfileOverrides: Partial<Record<FeatureTeam['id'], TeamDashboard
       name: '雁城教练组',
       title: '战术团队',
       style: '偏重前场冲击与转换速度',
-      note: '衡阳目前更适合用球队风格与主场氛围先承接球员互动功能。',
+      note: '衡阳队前场冲击力突出，主场氛围正在持续升温。',
     },
     players: [
       {
@@ -707,7 +707,7 @@ const dashboardProfileOverrides: Partial<Record<FeatureTeam['id'], TeamDashboard
         position: '前腰',
         height: '179cm',
         weight: '72kg',
-        contribution: '负责串联与远射，适合作为球迷评分入口。',
+        contribution: '负责中前场串联与远射，是球队进攻的重要一环。',
         goals: 5,
         ratingBase: 4.3,
         dataStatus: '公开姓名待补充',
@@ -749,7 +749,7 @@ const dashboardProfileOverrides: Partial<Record<FeatureTeam['id'], TeamDashboard
       name: '黄楚儒',
       title: '主教练',
       style: '强调韧性与高效防守反击',
-      note: '冠军气质与舜帝文化可以共同构成永州队的内容核心。',
+      note: '永州队以稳健防守和冠军气质见长，主场辨识度鲜明。',
     },
     players: [
       {
@@ -759,7 +759,7 @@ const dashboardProfileOverrides: Partial<Record<FeatureTeam['id'], TeamDashboard
         position: '进攻核心',
         height: '181cm',
         weight: '74kg',
-        contribution: '适合作为最佳球员档案与高光片段联动。',
+        contribution: '具备持续制造高光时刻的能力，是球队前场的重要得分点。',
         goals: 7,
         ratingBase: 4.8,
       },
@@ -787,7 +787,7 @@ const dashboardProfileOverrides: Partial<Record<FeatureTeam['id'], TeamDashboard
         dataStatus: '公开姓名待补充',
       },
     ],
-    dataStatus: '冠军队公开人物线索较多，适合作为人物看板优先完善对象。',
+    dataStatus: '冠军队公开人物线索较多，后续可继续补充更完整的人物资料。',
   },
 };
 
@@ -858,7 +858,7 @@ export const leagueLeaders: LeagueLeader[] = [
   {
     title: '冠军队伍',
     value: '永州队',
-    detail: '以黑马姿态完成逆袭，适合作为人物与主场荣誉叙事入口。',
+    detail: '以黑马姿态完成逆袭，主场荣誉感与关注度都很高。',
     accent: '#E63B2E',
   },
   {
@@ -870,7 +870,7 @@ export const leagueLeaders: LeagueLeader[] = [
   {
     title: '最佳球员',
     value: '高响',
-    detail: '适合作为球员评分、精彩时刻和海报展示的首批样本。',
+    detail: '球员评分、精彩时刻和海报展示都具备较高关注度。',
     accent: '#D32F2F',
   },
   {
@@ -892,7 +892,7 @@ function buildFallbackDashboardProfile(team: FeatureTeam): TeamDashboardProfile 
       name: `${team.city}教练组`,
       title: '战术团队',
       style: '围绕城市风格构建比赛节奏与主场气质',
-      note: '当前版本优先完成功能结构与展示方式，实名资料可后续替换。',
+      note: '现有公开资料以球队风格与主场气质为主，更多实名资料将持续补充。',
     },
     players: [
       {
@@ -938,9 +938,9 @@ function buildFallbackDashboardProfile(team: FeatureTeam): TeamDashboardProfile 
 
 function buildFallbackCultureProfile(team: FeatureTeam): TeamCultureProfile {
   return {
-    title: `${team.city}主场文化提案`,
+    title: `${team.city}主场文化`,
     culturalAnchor: team.badgeDesc,
-    culturalStory: `${team.story} 页面里建议把城市文化、队徽解读与球迷看台放在同一组内容中呈现，形成更完整的球队识别。`,
+    culturalStory: `${team.story} 主场文化还串联了队徽意象、看台口号与球迷组织，方便快速了解这支球队的城市气质。`,
     cheerSquad: `${team.city}啦啦队`,
     supporterGroup: `${team.city}主场看台`,
     rituals: ['赛前口号点火', '进球后旗阵联动', '赛后主场合唱'],
