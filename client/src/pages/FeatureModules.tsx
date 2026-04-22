@@ -189,22 +189,22 @@ export default function FeatureModules() {
         {
           title: '球队热度',
           value: `${activeTeamVotes} 票`,
-          helper: '查看球队支持度与当前人气排行。',
+          helper: '',
         },
         {
           title: '球员评分',
           value: averagePlayerRating.toFixed(1),
-          helper: '按当前设备和默认评分样本综合计算。',
+          helper: '',
         },
         {
           title: '线上打气',
           value: `${totalCheers} 次`,
-          helper: `当前专题口号模板 ${activeCulture.cheerTemplates.length} 条。`,
+          helper: '',
         },
         {
           title: '最新评论',
           value: `${totalMessages} 条`,
-          helper: '最新留言与比赛动态都在这里查看。',
+          helper: '',
         },
       ];
     }
@@ -213,22 +213,22 @@ export default function FeatureModules() {
       {
         title: '文化主题',
         value: activeCulture.title,
-        helper: activeCulture.culturalAnchor,
+        helper: '',
       },
       {
         title: '啦啦队',
         value: activeCulture.cheerSquad,
-        helper: '负责带动赛前热场与看台助威节奏。',
+        helper: '',
       },
       {
         title: '粉丝队',
         value: activeCulture.supporterGroup,
-        helper: '集中展示远征、横幅与主场口号。',
+        helper: '',
       },
       {
         title: '仪式内容',
         value: `${activeCulture.rituals.length} 项`,
-        helper: '围绕城市锚点、赛前入场和赛后合唱展开。',
+        helper: '',
       },
     ];
   }, [activeCulture, activeDashboard, activeRank, activeTeam, activeTeamVotes, activeView, averagePlayerRating, totalCheers, totalMessages]);
@@ -325,15 +325,12 @@ export default function FeatureModules() {
                 </div>
 
                 <h1 className="mt-5 text-3xl font-black leading-tight text-[oklch(0.18_0.02_260)] sm:text-5xl" style={{ fontFamily: "'Noto Serif SC', serif" }}>
-                  聚焦球队表现
-                  <span className="block text-[#8F1F1F]">一页看懂主场文化与球迷热度</span>
+                  {activeTeam.fullName}
+                  <span className="block text-[#8F1F1F]">数据、互动与主场文化</span>
                 </h1>
-                <p className="mt-5 max-w-2xl text-sm leading-8 text-[oklch(0.44_0.02_260)] sm:text-base">
-                  在这里可以快速查看当前球队的积分、阵容、教练、主场氛围与球迷互动，切换不同专题后还能继续了解城市文化和看台特色。
-                </p>
                 <div className="mt-5 rounded-[28px] border border-[#e0d2c8] bg-white/78 p-4 text-sm leading-7 text-[oklch(0.43_0.02_260)]">
                   <div className="text-xs uppercase tracking-[0.18em] text-[#8F1F1F]">球队速览</div>
-                  <p className="mt-3">{activeTheme?.note ?? `${activeTeam.teamName}以稳定发挥和主场声势见长，值得持续关注。`} {activeTeam.story}</p>
+                  <p className="mt-3">{activeTeam.slogan}</p>
                 </div>
               </div>
 
@@ -439,8 +436,8 @@ export default function FeatureModules() {
                 <PortalPanel>
                   <SectionHeader
                     eyebrow="球队总述"
-                    title={`${activeTeam.fullName} 重点信息`}
-                    description="聚焦积分、教练、主场与赛季走势，快速掌握当前球队的核心信息。"
+                    title={`${activeTeam.fullName} 核心信息`}
+                    description=""
                     icon={Shield}
                   />
                   <div className="mt-6 grid gap-5 lg:grid-cols-[1.1fr_0.9fr]">
@@ -448,7 +445,6 @@ export default function FeatureModules() {
                       <div className="text-xs uppercase tracking-[0.18em] text-[#8F1F1F]">球队气质</div>
                       <h3 className="mt-3 text-3xl font-black leading-tight" style={{ color: PORTAL_RED, fontFamily: "'Noto Serif SC', serif" }}>{activeTeam.slogan}</h3>
                       <p className="mt-4 text-sm leading-8 text-[oklch(0.42_0.02_260)]">{activeTeam.story}</p>
-                      <p className="mt-4 text-sm leading-8 text-[oklch(0.42_0.02_260)]">{activeTeam.badgeDesc}</p>
                     </div>
                     <div className="space-y-3">
                       <InfoCard title="主场场馆" content={activeTeam.stadium} accent={PORTAL_RED} />
@@ -462,7 +458,7 @@ export default function FeatureModules() {
                   <SectionHeader
                     eyebrow="赛季线索"
                     title="近期看点"
-                    description="集中查看近期状态、关键战役和教练信息。"
+                    description=""
                     icon={Trophy}
                   />
                   <div className="mt-6 space-y-4">
@@ -487,7 +483,7 @@ export default function FeatureModules() {
                   <SectionHeader
                     eyebrow="看板正文"
                     title="球队数据总览"
-                    description="按球队总览、阵容档案和联赛榜单查看核心数据。"
+                    description=""
                     icon={BarChart3}
                   />
                   <div className="flex flex-wrap gap-2">
@@ -621,7 +617,7 @@ export default function FeatureModules() {
                     <SectionHeader
                       eyebrow="球迷互动"
                       title="球队热度投票"
-                      description="查看人气排行，并为支持的球队投出一票。"
+                      description=""
                       icon={Vote}
                     />
                     <div className="mt-5 space-y-3">
@@ -667,7 +663,7 @@ export default function FeatureModules() {
                     <SectionHeader
                       eyebrow="看台应援"
                       title="线上打气"
-                      description="选择主场口号，立即加入球队线上应援。"
+                      description=""
                       icon={Megaphone}
                     />
                     <div className="mt-5 space-y-3">
@@ -699,7 +695,7 @@ export default function FeatureModules() {
                     <SectionHeader
                       eyebrow="比赛评论"
                       title="评论与比赛动态"
-                      description="查看最新留言，并同步了解比赛进程和赛前信息。"
+                      description=""
                       icon={Send}
                     />
                     <div className="mt-5 grid gap-5 xl:grid-cols-[0.9fr_1.1fr]">
@@ -772,7 +768,7 @@ export default function FeatureModules() {
                     <SectionHeader
                       eyebrow="阵容互动"
                       title="球员打分"
-                      description="查看球员表现，并为你关注的球员打分。"
+                      description=""
                       icon={Star}
                     />
                     <div className="mt-5 grid gap-4 lg:grid-cols-3">
@@ -830,10 +826,10 @@ export default function FeatureModules() {
                     <div className="relative max-w-2xl">
                       <div className="inline-flex items-center gap-2 rounded-full border border-[#8F1F1F]/10 bg-white/82 px-3 py-1 text-xs uppercase tracking-[0.2em] text-[#8F1F1F]">
                         <Flag className="h-3.5 w-3.5" />
-                        主场文化专题
+                        主场文化
                       </div>
                       <h2 className="mt-5 text-4xl font-black leading-tight" style={{ fontFamily: "'Noto Serif SC', serif" }}>{activeCulture.title}</h2>
-                      <p className="mt-5 text-sm leading-8 text-[oklch(0.42_0.02_260)]">{activeCulture.culturalStory}</p>
+                      <p className="mt-5 text-sm leading-8 text-[oklch(0.42_0.02_260)]">{activeCulture.culturalAnchor}</p>
                       <div className="mt-6 grid gap-3 sm:grid-cols-2">
                         <InfoCard title="文化锚点" content={activeCulture.culturalAnchor} accent={PORTAL_RED} />
                         <InfoCard title="主场标语" content={activeTeam.slogan} accent={PORTAL_RED} />
@@ -845,7 +841,7 @@ export default function FeatureModules() {
                 <div className="grid gap-4">
                   <InfoCard title="啦啦队" content={activeCulture.cheerSquad} accent={PORTAL_RED} />
                   <InfoCard title="粉丝队" content={activeCulture.supporterGroup} accent={PORTAL_RED} />
-                  <InfoCard title="主场看点" content={`从城市锚点到看台口号，这里集中展示最能代表 ${activeTeam.city} 主场气质的文化线索。`} accent={PORTAL_RED} />
+                    <InfoCard title="主场看点" content={`${activeTeam.city} 主场标语与仪式。`} accent={PORTAL_RED} />
                   <InfoCard title="代表口号" content={activeCulture.bannerSamples[0] ?? activeTeam.slogan} accent={PORTAL_RED} />
                 </div>
               </div>
@@ -854,13 +850,13 @@ export default function FeatureModules() {
                 <PortalPanel>
                   <SectionHeader
                     eyebrow="看台组织"
-                    title="啦啦队与粉丝队"
-                    description="了解主场球迷组织、应援方式和看台口号。"
+                    title="看台组织"
+                    description=""
                     icon={Users}
                   />
                   <div className="mt-6 space-y-4">
-                    <InfoCard title="啦啦队职责" content={`${activeCulture.cheerSquad} 负责赛前热场、看台节奏组织与主队助威。`} accent={PORTAL_RED} />
-                    <InfoCard title="粉丝队组织" content={`${activeCulture.supporterGroup} 集中展示远征、横幅、口号与赛后合影内容。`} accent={PORTAL_RED} />
+                    <InfoCard title="啦啦队职责" content={`${activeCulture.cheerSquad} 热场助威。`} accent={PORTAL_RED} />
+                    <InfoCard title="粉丝队组织" content={`${activeCulture.supporterGroup} 以横幅和口号应援为主。`} accent={PORTAL_RED} />
                     <div className="rounded-[24px] border border-[#ebe0d6] bg-[oklch(0.985_0.002_260)] p-4">
                       <div className="text-xs uppercase tracking-[0.18em] text-[oklch(0.55_0.02_260)]">线上打气模板</div>
                       <div className="mt-3 flex flex-wrap gap-2">
@@ -875,8 +871,8 @@ export default function FeatureModules() {
                 <PortalPanel>
                   <SectionHeader
                     eyebrow="主场仪式"
-                    title="仪式流程与横幅墙"
-                    description="查看赛前、赛中、赛后的主场仪式与代表横幅。"
+                    title="主场仪式"
+                    description=""
                     icon={Radio}
                   />
                   <div className="mt-6 grid gap-4 md:grid-cols-2">
@@ -914,14 +910,14 @@ export default function FeatureModules() {
                 <div>
                   <SectionHeader
                     eyebrow="城市文化"
-                    title="城市锚点与主场看台"
-                    description="集中查看城市文化锚点、代表横幅与球迷组织。"
+                    title="城市文化"
+                    description=""
                     icon={Flag}
                   />
                   <div className="mt-5 rounded-[28px] border border-[#e7dbcf] bg-white/88 p-5">
                     <div className="text-xs uppercase tracking-[0.18em] text-[#8F1F1F]">城市文化锚点</div>
                     <h3 className="mt-3 text-2xl font-black" style={{ fontFamily: "'Noto Serif SC', serif" }}>{activeCulture.title}</h3>
-                    <p className="mt-4 text-sm leading-8 text-[oklch(0.42_0.02_260)]">{activeCulture.culturalStory}</p>
+                    <p className="mt-4 text-sm leading-8 text-[oklch(0.42_0.02_260)]">{activeCulture.culturalAnchor}</p>
                   </div>
                 </div>
 
@@ -961,7 +957,7 @@ function SectionHeader({
 }: {
   eyebrow: string;
   title: string;
-  description: string;
+  description?: string;
   icon: typeof BarChart3;
 }) {
   return (
@@ -975,17 +971,17 @@ function SectionHeader({
           <h2 className="mt-1 text-2xl font-black" style={{ fontFamily: "'Noto Serif SC', serif" }}>{title}</h2>
         </div>
       </div>
-      <p className="mt-4 text-sm leading-7 text-[oklch(0.45_0.02_260)]">{description}</p>
+      {description ? <p className="mt-4 text-sm leading-7 text-[oklch(0.45_0.02_260)]">{description}</p> : null}
     </div>
   );
 }
 
-function SummaryCard({ title, value, helper }: { title: string; value: string; helper: string }) {
+function SummaryCard({ title, value, helper }: { title: string; value: string; helper?: string }) {
   return (
     <div className="rounded-[26px] border border-[#e1d6cb] bg-white px-5 py-5 shadow-[0_10px_26px_rgba(42,31,24,0.04)]">
       <div className="text-xs uppercase tracking-[0.18em] text-[oklch(0.55_0.02_260)]">{title}</div>
       <div className="mt-3 text-2xl font-black leading-tight text-[#8F1F1F]" style={{ fontFamily: "'Noto Serif SC', serif" }}>{value}</div>
-      <div className="mt-3 text-sm leading-7 text-[oklch(0.45_0.02_260)]">{helper}</div>
+      {helper ? <div className="mt-3 text-sm leading-7 text-[oklch(0.45_0.02_260)]">{helper}</div> : null}
     </div>
   );
 }
