@@ -308,14 +308,8 @@ export default function HunanMap({ onTeamSelect, selectedTeam, show3D, onToggle3
       ],
     });
 
-    // 天地图矢量底图
-    L.tileLayer('https://t{s}.tianditu.gov.cn/vec_w/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=vec&STYLE=default&TILEMATRIXSET=w&FORMAT=tiles&TILECOL={x}&TILEROW={y}&TILEMATRIX={z}&tk=c8a2e7fad2ff9b6e4baa0f498a20dab2', {
-      subdomains: ['0', '1', '2', '3', '4', '5', '6', '7'],
-      maxZoom: 18,
-    }).addTo(map);
-    // 天地图中文标注
-    L.tileLayer('https://t{s}.tianditu.gov.cn/cva_w/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=cva&STYLE=default&TILEMATRIXSET=w&FORMAT=tiles&TILECOL={x}&TILEROW={y}&TILEMATRIX={z}&tk=c8a2e7fad2ff9b6e4baa0f498a20dab2', {
-      subdomains: ['0', '1', '2', '3', '4', '5', '6', '7'],
+    L.tileLayer('https://webrd0{s}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}', {
+      subdomains: ['1', '2', '3', '4'],
       maxZoom: 18,
     }).addTo(map);
 
@@ -818,11 +812,6 @@ export default function HunanMap({ onTeamSelect, selectedTeam, show3D, onToggle3
             <span className="text-xs text-[oklch(0.42_0.02_260)]">当前图层：长沙 · {LAYER_META[activeServiceLayer].label} · 图例已支持自动收起</span>
           </div>
 
-          {/* 天地图 Logo */}
-          <div className="absolute bottom-5 right-16 z-[760] flex items-center gap-2 rounded-xl border border-white/80 bg-white/92 px-3 py-2 shadow-md backdrop-blur-md">
-            <img src="https://www.tianditu.gov.cn/images/logo.png" alt="天地图" className="h-5" crossOrigin="anonymous" />
-            <span className="text-[10px] text-[oklch(0.45_0.02_260)] font-medium">天地图</span>
-          </div>
         </>
       )}
     </div>
