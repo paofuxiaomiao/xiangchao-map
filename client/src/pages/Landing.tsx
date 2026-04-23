@@ -113,23 +113,7 @@ export default function Landing() {
 
         {/* Content */}
         <motion.div style={{ opacity: heroOpacity }} className="relative z-10 text-center px-6 max-w-5xl mx-auto">
-          {/* Top badge */}
-          <AnimatePresence>
-            {heroLoaded && (
-              <motion.div
-                initial={{ y: -30, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.3, duration: 0.8 }}
-                className="inline-flex items-center gap-2 px-5 py-2 mb-6 rounded-full border border-white/15 bg-white/5 backdrop-blur-md"
-              >
-                <Flame className="w-4 h-4 text-[#FF6B35]" />
-                <span className="text-sm tracking-[0.2em] text-white/80 font-medium" style={{ fontFamily: "'DM Mono', monospace" }}>
-                  2025 HUNAN FOOTBALL LEAGUE
-                </span>
-                <div className="w-1.5 h-1.5 rounded-full bg-[#FF6B35] animate-pulse" />
-              </motion.div>
-            )}
-          </AnimatePresence>
+
 
           <AnimatePresence>
             {heroLoaded && (
@@ -140,7 +124,7 @@ export default function Landing() {
                 className="mb-8 flex justify-center"
               >
                 <div className="rounded-[24px] border border-white/15 bg-white/10 px-4 py-3 backdrop-blur-xl">
-                  <LogoBadge light subtitle="湖南足球地理信息服务平台" />
+                  <LogoBadge light subtitle="湖南地理信息服务平台" />
                 </div>
               </motion.div>
             )}
@@ -225,43 +209,7 @@ export default function Landing() {
                     </button>
                   </div>
 
-                  <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-                    <button
-                      onClick={() => handleOpenModules()}
-                      className="rounded-full border border-white/15 bg-white/10 px-6 py-3 text-sm font-medium text-white/88 backdrop-blur-md transition-all duration-300 hover:bg-white/15"
-                      style={{ fontFamily: "'Noto Sans SC', sans-serif" }}
-                    >
-                      查看功能模块总览
-                    </button>
-                    <button
-                      onClick={() => handleOpenModules('dashboard')}
-                      className="rounded-full border border-white/15 bg-black/25 px-6 py-3 text-sm font-medium text-white/88 backdrop-blur-md transition-all duration-300 hover:bg-black/35"
-                      style={{ fontFamily: "'Noto Sans SC', sans-serif" }}
-                    >
-                      直达数字看板
-                    </button>
-                    <button
-                      onClick={() => handleOpenModules('interactive')}
-                      className="rounded-full border border-white/15 bg-black/25 px-6 py-3 text-sm font-medium text-white/88 backdrop-blur-md transition-all duration-300 hover:bg-black/35"
-                      style={{ fontFamily: "'Noto Sans SC', sans-serif" }}
-                    >
-                      直达互动中心
-                    </button>
-                    <button
-                      onClick={() => handleOpenModules('culture')}
-                      className="rounded-full border border-white/15 bg-black/25 px-6 py-3 text-sm font-medium text-white/88 backdrop-blur-md transition-all duration-300 hover:bg-black/35"
-                      style={{ fontFamily: "'Noto Sans SC', sans-serif" }}
-                    >
-                      直达主场文化
-                    </button>
-                    <button
-                      onClick={handleOpenH5}
-                      className="rounded-full border border-white/15 bg-black/25 px-6 py-3 text-sm font-medium text-white/88 backdrop-blur-md transition-all duration-300 hover:bg-black/35"
-                      style={{ fontFamily: "'Noto Sans SC', sans-serif" }}
-                    >
-                      进入 H5 体验
-                    </button>
-                  </div>
+
                 </motion.div>
               </>
             )}
