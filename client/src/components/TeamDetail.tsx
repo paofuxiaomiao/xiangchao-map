@@ -9,6 +9,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, Trophy, Target, Shield, Zap, MapPin, Star, Navigation, ThumbsUp, Utensils, Users } from 'lucide-react';
 import type { Team } from '@/data/teams';
 import { featureTeams, getTeamDashboardProfile } from '@/data/feature-data';
+import { assetPath } from '@/lib/sitePaths';
 import Stadium3D from './Stadium3D';
 
 // 湘菜推荐数据（按城市）
@@ -230,22 +231,11 @@ export default function TeamDetail({ team, onClose }: TeamDetailProps) {
               </div>
             </motion.div>
 
-            {/* 球员介绍 - 更突出 */}
+            {/* 主场场馆 - 移到球员介绍之前 */}
             <motion.div
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.45 }}
-              className="px-5 pb-4"
-            >
-              <SectionTitle icon={<Users className="w-3 h-3" />} title="核心球员" />
-              <PlayerShowcase teamId={team.id} color={team.color} />
-            </motion.div>
-
-            {/* 3D Stadium + 导航按钮 */}
-            <motion.div
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.5 }}
               className="px-5 pb-4"
             >
               <SectionTitle icon={<Star className="w-3 h-3" />} title="主场场馆" />
@@ -263,17 +253,37 @@ export default function TeamDetail({ team, onClose }: TeamDetailProps) {
               </a>
             </motion.div>
 
-            {/* Badge description */}
+            {/* Badge description + 队徽图片 */}
             <motion.div
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.6 }}
+              transition={{ delay: 0.5 }}
               className="px-5 pb-4"
             >
               <SectionTitle icon={<Shield className="w-3 h-3" />} title="队徽解读" />
-              <p className="text-sm text-[oklch(0.45_0.02_260)] leading-relaxed mt-2">
-                {team.badgeDesc}
-              </p>
+              <div className="flex items-start gap-4 mt-2">
+                <p className="text-sm text-[oklch(0.45_0.02_260)] leading-relaxed flex-1">
+                  {team.badgeDesc}
+                </p>
+                <div className="w-16 h-16 rounded-xl shrink-0 overflow-hidden bg-[oklch(0.95_0.003_260)] shadow-sm border border-[oklch(0.92_0.005_260)]">
+                  <img
+                    src={assetPath(`assets/badges/${team.name}.jpg`)}
+                    alt={`${team.name}队徽`}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
+            </motion.div>
+
+            {/* 球员介绍 */}
+            <motion.div
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.55 }}
+              className="px-5 pb-4"
+            >
+              <SectionTitle icon={<Users className="w-3 h-3" />} title="核心球员" />
+              <PlayerShowcase teamId={team.id} color={team.color} />
             </motion.div>
 
             {/* 湘菜推荐 */}

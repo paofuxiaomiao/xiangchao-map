@@ -5,14 +5,14 @@
 
 import { motion } from 'framer-motion';
 import { leagueStats } from '@/data/teams';
-import { Flame, Users, MapPin, Timer, Target } from 'lucide-react';
+import { Flame, Calendar, MapPin, Timer, Target } from 'lucide-react';
 
 const stats = [
   { label: '总比赛', value: String(leagueStats.totalMatches), suffix: '场', icon: <Flame className="w-3 h-3" />, },
   { label: '总进球', value: String(leagueStats.totalGoals), suffix: '球', icon: <Target className="w-3 h-3" />, },
   { label: '参赛城市', value: String(leagueStats.cities), suffix: '城', icon: <MapPin className="w-3 h-3" />, },
   { label: '赛程', value: leagueStats.duration, suffix: '', icon: <Timer className="w-3 h-3" />, },
-  { label: '文旅消费', value: leagueStats.tourismRevenue, suffix: '', icon: <Users className="w-3 h-3" />, },
+  { label: '今日日期', value: (() => { const d = new Date(); return `${String(d.getMonth() + 1).padStart(2, '0')}/${String(d.getDate()).padStart(2, '0')}`; })(), suffix: '', icon: <Calendar className="w-3 h-3" />, },
 ];
 
 export default function StatsBar() {

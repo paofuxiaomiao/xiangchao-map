@@ -9,6 +9,7 @@ import { motion } from 'framer-motion';
 import { Trophy, ChevronRight, ThumbsUp } from 'lucide-react';
 import { teams, type Team } from '@/data/teams';
 import { featureTeams } from '@/data/feature-data';
+import { assetPath } from '@/lib/sitePaths';
 
 interface TeamListProps {
   selectedTeam: Team | null;
@@ -96,21 +97,22 @@ export default function TeamList({ selectedTeam, onTeamSelect }: TeamListProps) 
                 />
               )}
 
-              {/* 队徽色块 */}
-              <div
-                className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 text-white font-black text-xs relative"
-                style={{
-                  background: `linear-gradient(135deg, ${team.color}, ${team.color}CC)`,
-                  boxShadow: `0 2px 8px ${team.color}30`,
-                }}
-              >
-                <span style={{ fontFamily: "'Noto Serif SC', serif", fontSize: '13px' }}>
-                  {team.name.slice(0, 1)}
-                </span>
+              {/* 队徽图片 */}
+              <div className="w-8 h-8 rounded-lg shrink-0 relative overflow-hidden bg-[oklch(0.95_0.003_260)]">
+                <img
+                  src={assetPath(`assets/badges/${team.name}.jpg`)}
+                  alt={`${team.name}队徽`}
+                  className="w-full h-full object-cover rounded-lg"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = 'none';
+                    target.parentElement!.innerHTML = `<span style="font-family:'Noto Serif SC',serif;font-size:13px;color:white;display:flex;align-items:center;justify-content:center;width:100%;height:100%;background:linear-gradient(135deg,${team.color},${team.color}CC)">${team.name.slice(0, 1)}</span>`;
+                  }}
+                />
                 {/* 排名角标 */}
                 {team.rank <= 3 && (
                   <div
-                    className="absolute -top-1 -right-1 w-4 h-4 rounded-full flex items-center justify-center text-[8px] font-black"
+                    className="absolute -top-1 -right-1 w-4 h-4 rounded-full flex items-center justify-center text-[8px] font-black z-10"
                     style={{
                       background: 'linear-gradient(135deg, #FFD700, #F9A825)',
                       color: '#5D4037',
