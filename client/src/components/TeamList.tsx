@@ -1,18 +1,54 @@
 /**
  * TeamList - 左侧队伍排行列表
  * Design: 明亮版 - 白底 + 红金点缀
+ * 改动: 增加队徽色块、点赞按钮、展示全部球队、英文改中文
  */
 
+import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Trophy, ChevronRight } from 'lucide-react';
+import { Trophy, ChevronRight, ThumbsUp } from 'lucide-react';
 import { teams, type Team } from '@/data/teams';
+import { featureTeams } from '@/data/feature-data';
 
 interface TeamListProps {
   selectedTeam: Team | null;
   onTeamSelect: (team: Team) => void;
 }
 
+// 合并所有球队：teams.ts 中有10支（有详细 stats），featureTeams 中有14支
+// 将 featureTeams 中不在 teams 里的球队转换为 Team 格式补充进来
+const allTeams: Team[] = (() => {
+  const existingIds = new Set(teams.map((t) => t.id));
+  const extraTeams: Team[] = featureTeams
+    .filter((ft) => !existingIds.has(ft.id))
+    .map((ft, idx) => ({
+      id: ft.id,
+      name: ft.city,
+      city: ft.city + '市',
+      fullName: ft.fullName,
+      rank: teams.length + idx + 1,
+      rankLabel: `第${teams.length + idx + 1}名`,
+      stadium: ft.stadium,
+      lat: ft.lat,
+      lng: ft.lng,
+      stats: { played: 0, won: 0, drawn: 0, lost: 0, goalsFor: 0, goalsAgainst: 0, goalDiff: 0, points: 0 },
+      badgeDesc: ft.badgeDesc,
+      color: ft.color,
+      slogan: ft.slogan,
+      stadiumImage: '',
+      highlights: ft.seasonHighlights,
+    }));
+  return [...teams, ...extraTeams];
+})();
+
 export default function TeamList({ selectedTeam, onTeamSelect }: TeamListProps) {
+  const [likes, setLikes] = useState<Record<string, number>>({});
+
+  const handleLike = (e: React.MouseEvent, teamId: string) => {
+    e.stopPropagation();
+    setLikes((prev) => ({ ...prev, [teamId]: (prev[teamId] ?? 0) + 1 }));
+  };
+
   return (
     <div className="h-full flex flex-col">
       {/* Header */}
@@ -28,24 +64,24 @@ export default function TeamList({ selectedTeam, onTeamSelect }: TeamListProps) 
             队伍排行
           </h3>
         </div>
-        <p className="text-[10px] text-[oklch(0.55_0.02_260)] mt-1.5 ml-[34px]" style={{ fontFamily: "'DM Mono', monospace" }}>
-          2025 XIANGCHAO · TOP 10
+        <p className="text-[10px] text-[oklch(0.55_0.02_260)] mt-1.5 ml-[34px]" style={{ fontFamily: "'Noto Sans SC', sans-serif" }}>
+          2025 湘超联赛 · 全部 {allTeams.length} 支球队
         </p>
         <div className="mt-3 h-px bg-gradient-to-r from-[#D32F2F]/15 to-transparent" />
       </div>
 
       {/* Team list */}
       <div className="flex-1 overflow-y-auto px-3 pb-3 space-y-0.5" style={{ scrollbarWidth: 'thin' }}>
-        {teams.map((team, index) => {
+        {allTeams.map((team, index) => {
           const isSelected = selectedTeam?.id === team.id;
           return (
             <motion.button
               key={team.id}
               initial={{ x: -30, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
-              transition={{ delay: 0.4 + index * 0.05, type: 'spring', damping: 20 }}
+              transition={{ delay: 0.4 + index * 0.04, type: 'spring', damping: 20 }}
               onClick={() => onTeamSelect(team)}
-              className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all duration-200 group text-left relative overflow-hidden ${
+              className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg transition-all duration-200 group text-left relative overflow-hidden ${
                 isSelected
                   ? 'bg-[oklch(0.97_0.005_25)] shadow-sm'
                   : 'bg-transparent hover:bg-[oklch(0.97_0.003_260)]'
@@ -60,29 +96,35 @@ export default function TeamList({ selectedTeam, onTeamSelect }: TeamListProps) 
                 />
               )}
 
-              {/* Rank number */}
+              {/* 队徽色块 */}
               <div
-                className="w-7 h-7 rounded-md flex items-center justify-center shrink-0 text-xs font-black relative"
+                className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 text-white font-black text-xs relative"
                 style={{
-                  background: team.rank <= 3
-                    ? `linear-gradient(135deg, ${team.color}18, ${team.color}08)`
-                    : 'oklch(0.96 0.003 260)',
-                  color: team.rank <= 3 ? team.color : 'oklch(0.55 0.02 260)',
-                  fontFamily: "'DM Mono', monospace",
-                  border: team.rank <= 3 ? `1px solid ${team.color}20` : '1px solid oklch(0.92 0.005 260)',
+                  background: `linear-gradient(135deg, ${team.color}, ${team.color}CC)`,
+                  boxShadow: `0 2px 8px ${team.color}30`,
                 }}
               >
-                {team.rank}
+                <span style={{ fontFamily: "'Noto Serif SC', serif", fontSize: '13px' }}>
+                  {team.name.slice(0, 1)}
+                </span>
+                {/* 排名角标 */}
+                {team.rank <= 3 && (
+                  <div
+                    className="absolute -top-1 -right-1 w-4 h-4 rounded-full flex items-center justify-center text-[8px] font-black"
+                    style={{
+                      background: 'linear-gradient(135deg, #FFD700, #F9A825)',
+                      color: '#5D4037',
+                      boxShadow: '0 1px 4px rgba(249,168,37,0.4)',
+                    }}
+                  >
+                    {team.rank}
+                  </div>
+                )}
               </div>
 
               {/* Team info */}
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2">
-                  {/* Team color dot */}
-                  <div
-                    className="w-2 h-2 rounded-full shrink-0"
-                    style={{ backgroundColor: team.color, boxShadow: `0 0 6px ${team.color}30` }}
-                  />
                   <span
                     className={`text-sm font-bold truncate transition-colors ${
                       isSelected ? 'text-[oklch(0.20_0.02_260)]' : 'text-[oklch(0.30_0.02_260)] group-hover:text-[oklch(0.20_0.02_260)]'
@@ -104,22 +146,35 @@ export default function TeamList({ selectedTeam, onTeamSelect }: TeamListProps) 
                     </span>
                   )}
                 </div>
-                <div className="flex items-center gap-2 mt-0.5 ml-4">
+                <div className="flex items-center gap-2 mt-0.5 ml-0">
                   <span
                     className="text-[10px] text-[oklch(0.50_0.02_260)] font-medium"
-                    style={{ fontFamily: "'DM Mono', monospace" }}
+                    style={{ fontFamily: "'Noto Sans SC', sans-serif" }}
                   >
-                    {team.stats.points}pts
+                    {team.stats.points > 0 ? `${team.stats.points}分` : '暂无数据'}
                   </span>
-                  <span className="text-[8px] text-[oklch(0.80_0.005_260)]">|</span>
-                  <span
-                    className="text-[10px] text-[oklch(0.55_0.02_260)]"
-                    style={{ fontFamily: "'DM Mono', monospace" }}
-                  >
-                    {team.stats.won}W {team.stats.drawn}D {team.stats.lost}L
-                  </span>
+                  {team.stats.points > 0 && (
+                    <>
+                      <span className="text-[8px] text-[oklch(0.80_0.005_260)]">|</span>
+                      <span
+                        className="text-[10px] text-[oklch(0.55_0.02_260)]"
+                        style={{ fontFamily: "'Noto Sans SC', sans-serif" }}
+                      >
+                        {team.stats.won}胜 {team.stats.drawn}平 {team.stats.lost}负
+                      </span>
+                    </>
+                  )}
                 </div>
               </div>
+
+              {/* 点赞按钮 */}
+              <button
+                onClick={(e) => handleLike(e, team.id)}
+                className="shrink-0 flex items-center gap-1 px-2 py-1 rounded-full text-[10px] font-bold transition-all bg-[oklch(0.97_0.003_260)] border border-[oklch(0.90_0.005_260)] text-[oklch(0.50_0.02_260)] hover:bg-red-50 hover:border-red-200 hover:text-red-400"
+              >
+                <ThumbsUp className="w-3 h-3" />
+                {(likes[team.id] ?? 0) > 0 && <span>{likes[team.id]}</span>}
+              </button>
 
               {/* Arrow */}
               <ChevronRight
@@ -136,8 +191,8 @@ export default function TeamList({ selectedTeam, onTeamSelect }: TeamListProps) 
 
       {/* Footer */}
       <div className="px-4 py-3 border-t border-[oklch(0.93_0.005_260)]">
-        <p className="text-[9px] text-[oklch(0.65_0.01_260)] text-center" style={{ fontFamily: "'DM Mono', monospace" }}>
-          DATA SOURCE: 2025 XIANGCHAO LEAGUE
+        <p className="text-[9px] text-[oklch(0.65_0.01_260)] text-center" style={{ fontFamily: "'Noto Sans SC', sans-serif" }}>
+          数据来源：2025 湘超联赛
         </p>
       </div>
     </div>

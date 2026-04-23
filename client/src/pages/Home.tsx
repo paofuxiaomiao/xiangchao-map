@@ -142,10 +142,10 @@ export default function Home() {
                 className="flex items-center gap-2.5 mt-0.5"
               >
                 <span
-                  className="text-[10px] text-white/50 tracking-[0.15em] uppercase"
-                  style={{ fontFamily: "'DM Mono', monospace" }}
+                  className="text-[10px] text-white/50 tracking-[0.15em]"
+                  style={{ fontFamily: "'Noto Sans SC', sans-serif" }}
                 >
-                  Hunan Football League 2025
+                  2025 湘超联赛
                 </span>
                 <div className="w-px h-3 bg-white/20" />
                 <div className="flex items-center gap-1 px-2 py-0.5 rounded-sm bg-white/10 border border-white/15">

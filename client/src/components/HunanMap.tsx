@@ -308,8 +308,14 @@ export default function HunanMap({ onTeamSelect, selectedTeam, show3D, onToggle3
       ],
     });
 
-    L.tileLayer('https://webrd0{s}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}', {
-      subdomains: ['1', '2', '3', '4'],
+    // 天地图矢量底图
+    L.tileLayer('https://t{s}.tianditu.gov.cn/vec_w/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=vec&STYLE=default&TILEMATRIXSET=w&FORMAT=tiles&TILECOL={x}&TILEROW={y}&TILEMATRIX={z}&tk=c8a2e7fad2ff9b6e4baa0f498a20dab2', {
+      subdomains: ['0', '1', '2', '3', '4', '5', '6', '7'],
+      maxZoom: 18,
+    }).addTo(map);
+    // 天地图中文标注
+    L.tileLayer('https://t{s}.tianditu.gov.cn/cva_w/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=cva&STYLE=default&TILEMATRIXSET=w&FORMAT=tiles&TILECOL={x}&TILEROW={y}&TILEMATRIX={z}&tk=c8a2e7fad2ff9b6e4baa0f498a20dab2', {
+      subdomains: ['0', '1', '2', '3', '4', '5', '6', '7'],
       maxZoom: 18,
     }).addTo(map);
 
@@ -701,7 +707,7 @@ export default function HunanMap({ onTeamSelect, selectedTeam, show3D, onToggle3
                 >
                   <div className="flex items-start justify-between gap-3">
                     <div>
-                      <div className="text-[11px] uppercase tracking-[0.22em] text-[oklch(0.55_0.02_260)]">Changsha Demo</div>
+                      <div className="text-[11px] tracking-[0.22em] text-[oklch(0.55_0.02_260)]">长沙示例</div>
                       <h3 className="mt-1 text-lg font-black text-[oklch(0.18_0.02_260)]" style={{ fontFamily: "'Noto Serif SC', serif" }}>
                         长沙服务图层示例
                       </h3>
@@ -756,7 +762,7 @@ export default function HunanMap({ onTeamSelect, selectedTeam, show3D, onToggle3
                     <div className="mt-4 rounded-[22px] border border-[oklch(0.92_0.005_260)] bg-[oklch(0.985_0.002_260)] p-4">
                       <div className="flex items-center justify-between gap-3">
                         <div>
-                          <div className="text-[11px] uppercase tracking-[0.18em] text-[oklch(0.55_0.02_260)]">
+                          <div className="text-[11px] tracking-[0.18em] text-[oklch(0.55_0.02_260)]">
                             {LAYER_META[activeServiceLayer].label}
                           </div>
                           <div className="mt-1 text-base font-black text-[oklch(0.18_0.02_260)]" style={{ fontFamily: "'Noto Serif SC', serif" }}>
@@ -792,7 +798,7 @@ export default function HunanMap({ onTeamSelect, selectedTeam, show3D, onToggle3
                     style={{ background: `linear-gradient(135deg, ${activeServicePoi?.color ?? '#D32F2F'}, ${(activeServicePoi?.color ?? '#D32F2F')}CC)` }}
                   />
                   <div className="text-left">
-                    <div className="text-[10px] uppercase tracking-[0.2em] text-[oklch(0.55_0.02_260)]">长沙图例</div>
+                    <div className="text-[10px] tracking-[0.2em] text-[oklch(0.55_0.02_260)]">长沙图例</div>
                     <div className="mt-0.5 text-sm font-bold text-[oklch(0.18_0.02_260)]">{LAYER_META[activeServiceLayer].label} · {activeServicePoi?.title ?? '查看详情'}</div>
                   </div>
                   <ChevronRight className="h-4 w-4 text-[oklch(0.42_0.02_260)]" />
@@ -810,6 +816,12 @@ export default function HunanMap({ onTeamSelect, selectedTeam, show3D, onToggle3
           <div className="pointer-events-none absolute bottom-5 left-4 z-[760] hidden rounded-2xl border border-white/80 bg-white/88 px-3 py-2 shadow-lg shadow-black/5 backdrop-blur-md md:flex md:items-center md:gap-2">
             {layerIcon(activeServiceLayer)}
             <span className="text-xs text-[oklch(0.42_0.02_260)]">当前图层：长沙 · {LAYER_META[activeServiceLayer].label} · 图例已支持自动收起</span>
+          </div>
+
+          {/* 天地图 Logo */}
+          <div className="absolute bottom-5 right-16 z-[760] flex items-center gap-2 rounded-xl border border-white/80 bg-white/92 px-3 py-2 shadow-md backdrop-blur-md">
+            <img src="https://www.tianditu.gov.cn/images/logo.png" alt="天地图" className="h-5" crossOrigin="anonymous" />
+            <span className="text-[10px] text-[oklch(0.45_0.02_260)] font-medium">天地图</span>
           </div>
         </>
       )}

@@ -223,7 +223,7 @@ export default function Landing() {
           transition={{ delay: 2 }}
           className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
         >
-          <span className="text-xs text-white/30 tracking-[0.2em]" style={{ fontFamily: "'DM Mono', monospace" }}>SCROLL</span>
+          <span className="text-xs text-white/30 tracking-[0.2em]" style={{ fontFamily: "'DM Mono', monospace" }}>向下滑动</span>
           <motion.div
             animate={{ y: [0, 8, 0] }}
             transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut' }}
@@ -254,7 +254,7 @@ export default function Landing() {
           >
             <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 rounded-full border border-[#D32F2F]/20 bg-[#D32F2F]/5">
               <TrendingUp className="w-3.5 h-3.5 text-[#FF5252]" />
-              <span className="text-xs tracking-[0.15em] text-[#FF8A80]" style={{ fontFamily: "'DM Mono', monospace" }}>LEAGUE OVERVIEW</span>
+              <span className="text-xs tracking-[0.15em] text-[#FF8A80]" style={{ fontFamily: "'DM Mono', monospace" }}>赛事概览</span>
             </div>
             <h2
               className="text-4xl md:text-5xl font-black mb-4"
@@ -406,7 +406,7 @@ export default function Landing() {
             >
               <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 rounded-full border border-[#D32F2F]/20 bg-[#D32F2F]/5">
                 <Flame className="w-3.5 h-3.5 text-[#FF5252]" />
-                <span className="text-xs tracking-[0.15em] text-[#FF8A80]" style={{ fontFamily: "'DM Mono', monospace" }}>PASSION & CULTURE</span>
+                <span className="text-xs tracking-[0.15em] text-[#FF8A80]" style={{ fontFamily: "'DM Mono', monospace" }}>球迷文化</span>
               </div>
 
               <h2
@@ -476,7 +476,7 @@ export default function Landing() {
           >
             <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 rounded-full border border-[#D32F2F]/20 bg-[#D32F2F]/5">
               <Star className="w-3.5 h-3.5 text-[#FFD54F]" />
-              <span className="text-xs tracking-[0.15em] text-[#FF8A80]" style={{ fontFamily: "'DM Mono', monospace" }}>TEAM SHOWCASE</span>
+              <span className="text-xs tracking-[0.15em] text-[#FF8A80]" style={{ fontFamily: "'DM Mono', monospace" }}>队伍巡礼</span>
             </div>
             <h2
               className="text-4xl md:text-5xl font-black mb-4"
@@ -694,7 +694,7 @@ export default function Landing() {
             </span>
           </div>
           <span className="text-xs text-white/15" style={{ fontFamily: "'DM Mono', monospace" }}>
-            2025 HUNAN FOOTBALL LEAGUE · DATA VISUALIZATION
+            2025 湘超联赛 · 数字地图看板
           </span>
         </div>
       </footer>

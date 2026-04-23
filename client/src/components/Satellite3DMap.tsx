@@ -383,7 +383,7 @@ export default function Satellite3DMap({ team, onClose }: Satellite3DMapProps) {
               正在加载3D实景...
             </p>
             <p className="mt-1.5 text-[11px] text-white/40 tracking-wider" style={{ fontFamily: "'DM Mono', monospace" }}>
-              Satellite · 3D Terrain · Buildings
+              卫星影像 · 3D地形 · 建筑
             </p>
           </div>
         </div>
@@ -457,7 +457,7 @@ export default function Satellite3DMap({ team, onClose }: Satellite3DMapProps) {
                       {team.stadium}
                     </h4>
                     <p className="text-white/80 text-[10px] mt-0.5 drop-shadow" style={{ fontFamily: "'DM Mono', monospace" }}>
-                      3D ARCHITECTURAL RENDER
+                      3D场馆渲染图
                     </p>
                   </div>
                   <div
@@ -575,7 +575,7 @@ export default function Satellite3DMap({ team, onClose }: Satellite3DMapProps) {
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
           </svg>
-          {buildingsEnabled ? '3D建筑 ON' : '3D建筑 OFF'}
+          {buildingsEnabled ? '3D建筑 开' : '3D建筑 关'}
         </button>
 
         {/* Reset */}

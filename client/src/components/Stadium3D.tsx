@@ -88,7 +88,7 @@ export default function Stadium3D({ team }: Stadium3DProps) {
                 fontFamily: "'DM Mono', monospace",
               }}
             >
-              Home Stadium
+              主场场馆
             </span>
           </div>
           <h4
