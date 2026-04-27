@@ -137,7 +137,17 @@ export default function StatsBar() {
       {/* 赛程缩略图 Dialog */}
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent
-          className="max-w-2xl w-[calc(100vw-2rem)] p-0 overflow-hidden bg-white border-[oklch(0.92_0.005_260)] sm:rounded-2xl"
+          /*
+           * 修复：Tailwind v4 下 shadcn DialogContent 默认的
+           *   `translate-x-[-50%] translate-y-[-50%]` 会被
+           *   `data-[state]:zoom-*` 动画末帧的 `transform: none` 覆盖，
+           *   导致弹窗实际位于视口右下角之外看不见。
+           * 对策：不依赖 Tailwind translate 工具类，改用 inline style 强制
+           *       transform: translate(-50%, -50%)，同时在 className 里以
+           *       arbitrary 变体 [transform:translate(-50%,-50%)] 保留原公然。
+           */
+          style={{ transform: 'translate(-50%, -50%)' }}
+          className="!translate-x-0 !translate-y-0 [transform:translate(-50%,-50%)] max-w-2xl w-[calc(100vw-2rem)] p-0 overflow-hidden bg-white border-[oklch(0.92_0.005_260)] sm:rounded-2xl"
         >
           {/* 顶部红色装饰条 */}
           <div className="relative h-16 px-6 flex items-end pb-3"
