@@ -275,9 +275,14 @@ export default function TeamDetail({ team, onClose }: TeamDetailProps) {
                 </p>
                 <div className="w-16 h-16 rounded-xl shrink-0 overflow-hidden bg-[oklch(0.95_0.003_260)] shadow-sm border border-[oklch(0.92_0.005_260)]">
                   <img
-                    src={assetPath(`assets/badges/${team.name}.jpg`)}
+                    src={assetPath(`assets/badges/${team.id}.jpg`)}
                     alt={`${team.name}队徽`}
                     className="w-full h-full object-cover"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                      target.parentElement!.innerHTML = `<span style="font-family:'Noto Serif SC',serif;font-size:24px;color:white;display:flex;align-items:center;justify-content:center;width:100%;height:100%;background:linear-gradient(135deg,${team.color},${team.color}CC)">${team.name.slice(0, 1)}</span>`;
+                    }}
                   />
                 </div>
               </div>

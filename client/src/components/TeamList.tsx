@@ -100,7 +100,7 @@ export default function TeamList({ selectedTeam, onTeamSelect }: TeamListProps) 
               {/* 队徽图片 */}
               <div className="w-8 h-8 rounded-lg shrink-0 relative overflow-hidden bg-[oklch(0.95_0.003_260)]">
                 <img
-                  src={assetPath(`assets/badges/${team.name}.jpg`)}
+                  src={assetPath(`assets/badges/${team.id}.jpg`)}
                   alt={`${team.name}队徽`}
                   className="w-full h-full object-cover rounded-lg"
                   onError={(e) => {
