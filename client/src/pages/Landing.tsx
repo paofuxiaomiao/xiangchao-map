@@ -278,7 +278,7 @@ export default function Landing() {
               { value: matchCount, suffix: '场', label: '总比赛', icon: Zap, color: '#FF5252' },
               { value: goalCount, suffix: '球', label: '总进球', icon: Star, color: '#FFD54F' },
               { value: cityCount, suffix: '城', label: '参赛城市', icon: MapPin, color: '#FF8A65' },
-              { value: 0, suffix: '吸引 2.7亿+', label: '文旅消费', icon: TrendingUp, color: '#4FC3F7', isText: true },
+              { value: 0, suffix: '吸引人次 2.7亿+', label: '线上观赛人次', icon: TrendingUp, color: '#4FC3F7', isText: true },
             ].map((stat, i) => (
               <motion.div
                 key={stat.label}
