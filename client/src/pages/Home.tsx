@@ -179,15 +179,23 @@ export default function Home() {
         </div>
         {/* Athlete silhouette showcase strip */}
         <div className="relative overflow-hidden" style={{ height: '100px' }}>
-          <div
-            className="absolute inset-0"
-            style={{
-              backgroundImage: `url(${assetPath('assets/header-silhouette-strip.png')})`,
-              backgroundSize: '100% 100%',
-              backgroundPosition: 'center center',
-              backgroundRepeat: 'no-repeat',
-            }}
-          />
+          {/* Athlete silhouette figures - evenly distributed */}
+          {[
+            { src: 'assets/athletes/athlete-soccer.png', left: '8%' },
+            { src: 'assets/athletes/athlete-runner.png', left: '25%' },
+            { src: 'assets/athletes/athlete-basketball.png', left: '42%' },
+            { src: 'assets/athletes/athlete-swimmer.png', left: '59%' },
+            { src: 'assets/athletes/athlete-martial.png', left: '76%' },
+          ].map((athlete, i) => (
+            <img
+              key={i}
+              src={assetPath(athlete.src)}
+              alt=""
+              className="absolute bottom-0 h-full object-contain opacity-40"
+              style={{ left: athlete.left, transform: 'translateX(-50%)' }}
+            />
+          ))}
+          {/* Top/bottom gradient overlay */}
           <div
             className="absolute inset-0"
             style={{
