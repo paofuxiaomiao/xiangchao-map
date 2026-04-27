@@ -17,11 +17,10 @@ import TeamList from '@/components/TeamList';
 import TeamDetail from '@/components/TeamDetail';
 import StatsBar from '@/components/StatsBar';
 import LogoBadge from '@/components/LogoBadge';
-import { teams, type Team, leagueStats } from '@/data/teams';
+import { teams, type Team, HERO_BANNER, leagueStats } from '@/data/teams';
 import { Trophy, Map, ArrowLeft } from 'lucide-react';
-import { assetPath } from '@/lib/sitePaths';
 import { projectLogo } from '@/data/feature-data';
-import { routePath } from '@/lib/sitePaths';
+import { routePath, assetPath } from '@/lib/sitePaths';
 
 export default function Home() {
   const [selectedTeam, setSelectedTeam] = useState<Team | null>(null);
@@ -54,32 +53,40 @@ export default function Home() {
     <div className="h-screen w-screen overflow-hidden bg-[oklch(0.96_0.005_220)] flex flex-col">
       {/* Top Header Bar - Red gradient */}
       <header className="relative z-10 shrink-0">
-        {/* Background - athlete silhouette image as full header bg */}
+        {/* Background - deep red gradient */}
         <div className="absolute inset-0 overflow-hidden">
           <div
             className="absolute inset-0"
             style={{
-              backgroundImage: `url(${assetPath('assets/header-silhouette-bg.png')})`,
-              backgroundSize: '100% auto',
-              backgroundPosition: 'center center',
-              backgroundRepeat: 'no-repeat',
-              backgroundColor: '#8B0000',
+              background: 'linear-gradient(135deg, #C62828 0%, #D32F2F 30%, #E53935 60%, #B71C1C 100%)',
             }}
           />
-          {/* Top gradient for text readability */}
+          {/* Subtle texture overlay */}
           <div
-            className="absolute inset-0"
+            className="absolute inset-0 opacity-[0.06]"
             style={{
-              background: 'linear-gradient(180deg, rgba(100,0,0,0.55) 0%, rgba(139,0,0,0.15) 50%, transparent 100%)',
+              backgroundImage: `url(${HERO_BANNER})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center 30%',
+              mixBlendMode: 'overlay',
             }}
           />
           {/* Noise grain */}
           <div className="absolute inset-0 opacity-[0.03]" style={{
             backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 256 256\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'n\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23n)\' opacity=\'0.5\'/%3E%3C/svg%3E")',
           }} />
+          {/* Football player silhouettes background overlay */}
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              backgroundImage: `url(${assetPath('assets/header-football-bg.png')})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center center',
+            }}
+          />
         </div>
         
-        <div className="relative px-5 pt-3 pb-3 flex items-center justify-between">
+        <div className="relative px-5 py-3.5 flex items-center justify-between">
           {/* Left: Title */}
           <div className="flex items-center gap-4">
             {/* Back to Landing */}
@@ -176,32 +183,6 @@ export default function Home() {
               <StatsBar />
             </div>
           </div>
-        </div>
-        {/* Athlete silhouette showcase strip */}
-        <div className="relative overflow-hidden" style={{ height: '100px' }}>
-          {/* Athlete silhouette figures - evenly distributed */}
-          {[
-            { src: 'assets/athletes/athlete-soccer.png', left: '8%' },
-            { src: 'assets/athletes/athlete-runner.png', left: '25%' },
-            { src: 'assets/athletes/athlete-basketball.png', left: '42%' },
-            { src: 'assets/athletes/athlete-swimmer.png', left: '59%' },
-            { src: 'assets/athletes/athlete-martial.png', left: '76%' },
-          ].map((athlete, i) => (
-            <img
-              key={i}
-              src={assetPath(athlete.src)}
-              alt=""
-              className="absolute bottom-0 h-full object-contain opacity-40"
-              style={{ left: athlete.left, transform: 'translateX(-50%)' }}
-            />
-          ))}
-          {/* Top/bottom gradient overlay */}
-          <div
-            className="absolute inset-0"
-            style={{
-              background: 'linear-gradient(180deg, rgba(139,0,0,0.35) 0%, transparent 30%, transparent 70%, rgba(139,0,0,0.15) 100%)',
-            }}
-          />
         </div>
       </header>
 
