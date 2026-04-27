@@ -15,7 +15,7 @@ import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import { useLocation } from 'wouter';
 import { teams, leagueStats } from '@/data/teams';
 import LogoBadge from '@/components/LogoBadge';
-import { MapPin, Trophy, Flame, ChevronDown, ArrowRight, Users, Timer, TrendingUp, Zap, Star } from 'lucide-react';
+import { MapPin, Trophy, Flame, ChevronDown, ArrowRight, Users, Timer, TrendingUp, Zap, Star, Crown } from 'lucide-react';
 import { routePath } from '@/lib/sitePaths';
 
 // CDN image URLs
@@ -124,7 +124,7 @@ export default function Landing() {
                 className="mb-8 flex justify-center"
               >
                 <div className="rounded-[24px] border border-white/15 bg-white/10 px-4 py-3 backdrop-blur-xl">
-                  <LogoBadge light subtitle="湖南地理信息服务平台" />
+                  <LogoBadge light subtitle="湖南地理信息服务" />
                 </div>
               </motion.div>
             )}
@@ -254,7 +254,7 @@ export default function Landing() {
           >
             <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 rounded-full border border-[#D32F2F]/20 bg-[#D32F2F]/5">
               <TrendingUp className="w-3.5 h-3.5 text-[#FF5252]" />
-              <span className="text-xs tracking-[0.15em] text-[#FF8A80]" style={{ fontFamily: "'DM Mono', monospace" }}>赛事概览</span>
+              <span className="text-xs tracking-[0.15em] text-[#FF8A80]" style={{ fontFamily: "'DM Mono', monospace" }}>赛事回顾</span>
             </div>
             <h2
               className="text-4xl md:text-5xl font-black mb-4"
@@ -265,10 +265,10 @@ export default function Landing() {
                 WebkitTextFillColor: 'transparent',
               }}
             >
-              赛事概览
+              赛事回顾
             </h2>
             <p className="text-white/40 text-lg max-w-xl mx-auto" style={{ fontFamily: "'Noto Sans SC', sans-serif" }}>
-              2025赛季湘超联赛，一组数字诠释三湘足球的火热与激情
+              2024赛季湘超联赛，一组数字诠释三湘足球的火热与激情
             </p>
           </motion.div>
 
@@ -278,7 +278,7 @@ export default function Landing() {
               { value: matchCount, suffix: '场', label: '总比赛', icon: Zap, color: '#FF5252' },
               { value: goalCount, suffix: '球', label: '总进球', icon: Star, color: '#FFD54F' },
               { value: cityCount, suffix: '城', label: '参赛城市', icon: MapPin, color: '#FF8A65' },
-              { value: 0, suffix: '113.59亿', label: '文旅消费', icon: TrendingUp, color: '#4FC3F7', isText: true },
+              { value: 0, suffix: '吸引 2.7亿+', label: '文旅消费', icon: TrendingUp, color: '#4FC3F7', isText: true },
             ].map((stat, i) => (
               <motion.div
                 key={stat.label}
@@ -342,6 +342,45 @@ export default function Landing() {
                 <span className="text-sm font-bold text-[#FFD54F]/80" style={{ fontFamily: "'Noto Sans SC', sans-serif" }}>{item.value}</span>
               </div>
             ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ===== 2025赛季即将开启提示卡片 ===== */}
+      <section className="relative py-16 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0A] via-[#1A0505] to-[#0A0A0A]" />
+        <div className="relative z-10 max-w-3xl mx-auto px-6">
+          <motion.div
+            initial={{ y: 30, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="relative overflow-hidden rounded-2xl border border-[#D32F2F]/20 bg-gradient-to-r from-[#D32F2F]/10 via-[#B71C1C]/5 to-[#D32F2F]/10 backdrop-blur-sm p-8 text-center"
+          >
+            {/* 装饰光晕 */}
+            <div className="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-[#FF5252]/10 blur-3xl" />
+            <div className="absolute -bottom-10 -left-10 w-40 h-40 rounded-full bg-[#FFD54F]/10 blur-3xl" />
+            
+            <div className="relative">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-4 rounded-full border border-[#FFD54F]/20 bg-[#FFD54F]/5">
+                <Flame className="w-3.5 h-3.5 text-[#FFD54F]" />
+                <span className="text-xs tracking-[0.15em] text-[#FFD54F]" style={{ fontFamily: "'DM Mono', monospace" }}>COMING SOON</span>
+              </div>
+              <h3
+                className="text-2xl md:text-3xl font-black mb-3"
+                style={{
+                  fontFamily: "'Noto Serif SC', serif",
+                  background: 'linear-gradient(135deg, #FFFFFF 0%, #FFD54F 50%, #FF5252 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                }}
+              >
+                2025赛季即将开启
+              </h3>
+              <p className="text-white/50 text-base max-w-lg mx-auto leading-relaxed" style={{ fontFamily: "'Noto Sans SC', sans-serif" }}>
+                新赛季蓄势待发，更多精彩赛事敬请期待。让我们一起期待三湘足球的下一次燃烧！
+              </p>
+            </div>
           </motion.div>
         </div>
       </section>
@@ -526,13 +565,13 @@ export default function Landing() {
                       #{team.rank}
                     </span>
                     {team.rankLabel.includes('冠') && (
-                      <Trophy className="w-4 h-4 text-[#FFD54F]" />
+                      <Crown className="w-5 h-5" style={{ color: '#FFD700', filter: 'drop-shadow(0 1px 3px rgba(255,215,0,0.5))' }} />
                     )}
                     {team.rankLabel.includes('亚') && (
-                      <Trophy className="w-4 h-4 text-[#C0C0C0]" />
+                      <Crown className="w-5 h-5" style={{ color: '#C0C0C0', filter: 'drop-shadow(0 1px 3px rgba(192,192,192,0.5))' }} />
                     )}
                     {team.rankLabel.includes('季') && (
-                      <Trophy className="w-4 h-4 text-[#CD7F32]" />
+                      <Crown className="w-5 h-5" style={{ color: '#CD7F32', filter: 'drop-shadow(0 1px 3px rgba(205,127,50,0.5))' }} />
                     )}
                   </div>
 

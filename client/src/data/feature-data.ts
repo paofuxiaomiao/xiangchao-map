@@ -963,7 +963,7 @@ export function getTeamCultureProfile(teamId: FeatureTeam['id']) {
 
 export const moduleStats = [
   { label: '覆盖球队', value: '14' },
-  { label: '功能模块', value: '6' },
+  { label: '互动中心', value: '6' },
   { label: '互动入口', value: '4' },
   { label: '文化模块', value: '3' },
 ];

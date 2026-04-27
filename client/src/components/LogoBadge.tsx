@@ -9,7 +9,7 @@ interface LogoBadgeProps {
 export default function LogoBadge({
   compact = false,
   light = false,
-  subtitle = '湖南地理信息服务平台',
+  subtitle = '湖南地理信息服务',
 }: LogoBadgeProps) {
   return (
     <div className="flex items-center gap-3">
@@ -22,7 +22,7 @@ export default function LogoBadge({
       >
         <img
           src={projectLogo}
-          alt="湖南地理信息服务平台湘超平台 LOGO"
+          alt="湘超联赛 LOGO"
           className={compact ? 'h-8 w-8 object-contain' : 'h-10 w-10 object-contain'}
         />
       </div>
@@ -33,7 +33,7 @@ export default function LogoBadge({
           }`}
           style={{ fontFamily: "'Noto Serif SC', serif" }}
         >
-          湖南地理信息服务平台湘超平台
+          湘超联赛
         </div>
         <p
           className={`truncate text-xs ${light ? 'text-white/70' : 'text-[oklch(0.52_0.02_260)]'}`}

@@ -6,7 +6,7 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Trophy, Target, Shield, Zap, MapPin, Star, Navigation, ThumbsUp, Utensils, Users } from 'lucide-react';
+import { X, Trophy, Target, Shield, Zap, MapPin, Star, Navigation, ThumbsUp, Utensils, Users, Maximize2 } from 'lucide-react';
 import type { Team } from '@/data/teams';
 import { featureTeams, getTeamDashboardProfile } from '@/data/feature-data';
 import { assetPath } from '@/lib/sitePaths';
@@ -239,7 +239,15 @@ export default function TeamDetail({ team, onClose }: TeamDetailProps) {
               className="px-5 pb-4"
             >
               <SectionTitle icon={<Star className="w-3 h-3" />} title="主场场馆" />
-              <Stadium3D team={team} />
+              {/* 场馆图片容器 - 右上角“点击进入全景”提示 */}
+              <div className="relative group cursor-pointer">
+                <Stadium3D team={team} />
+                {/* 右上角全景提示 */}
+                <div className="absolute top-2 right-2 z-10 flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-black/50 backdrop-blur-sm text-white/90 text-xs font-bold transition-all group-hover:bg-black/70">
+                  <Maximize2 className="w-3.5 h-3.5 transition-transform group-hover:scale-110" />
+                  <span>点击进入全景</span>
+                </div>
+              </div>
               {/* 场馆导航按钮 */}
               <a
                 href={`https://uri.amap.com/search?keyword=${encodeURIComponent(team.stadium)}&city=${encodeURIComponent(team.city)}`}

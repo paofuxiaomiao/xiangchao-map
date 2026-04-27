@@ -199,7 +199,7 @@ export default function H5Experience() {
           <div className="absolute inset-0 bg-gradient-to-r from-[#B71C1C]/35 via-transparent to-[#FFB300]/15" />
           <div className="relative z-10 flex h-full items-end px-5 pb-14 pt-20 lg:px-8 lg:pb-20 lg:pt-24">
             <div className="mx-auto w-full max-w-sm">
-              <LogoBadge light subtitle="湖南足球地理信息服务平台" />
+              <LogoBadge light subtitle="湖南地理信息服务" />
               <div className="mt-7 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-2 text-xs tracking-[0.18em] text-white/80 backdrop-blur-md">
                 <Flame className="h-4 w-4 text-[#FFB300]" />
                 一张图看湘超 · 服务球迷，带动周边
