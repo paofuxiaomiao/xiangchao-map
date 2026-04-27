@@ -54,22 +54,23 @@ export default function Home() {
     <div className="h-screen w-screen overflow-hidden bg-[oklch(0.96_0.005_220)] flex flex-col">
       {/* Top Header Bar - Red gradient */}
       <header className="relative z-10 shrink-0">
-        {/* Background - deep red gradient + athlete silhouette */}
+        {/* Background - athlete silhouette image as full header bg */}
         <div className="absolute inset-0 overflow-hidden">
           <div
             className="absolute inset-0"
             style={{
               backgroundImage: `url(${assetPath('assets/header-silhouette-bg.png')})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center bottom',
+              backgroundSize: '100% auto',
+              backgroundPosition: 'center center',
               backgroundRepeat: 'no-repeat',
+              backgroundColor: '#8B0000',
             }}
           />
-          {/* Gradient overlay for text readability */}
+          {/* Top gradient for text readability */}
           <div
             className="absolute inset-0"
             style={{
-              background: 'linear-gradient(180deg, rgba(183,28,28,0.3) 0%, rgba(198,40,40,0.15) 100%)',
+              background: 'linear-gradient(180deg, rgba(100,0,0,0.55) 0%, rgba(139,0,0,0.15) 50%, transparent 100%)',
             }}
           />
           {/* Noise grain */}
@@ -78,7 +79,7 @@ export default function Home() {
           }} />
         </div>
         
-        <div className="relative px-5 py-3.5 flex items-center justify-between">
+        <div className="relative px-5 pt-3 pb-3 flex items-center justify-between">
           {/* Left: Title */}
           <div className="flex items-center gap-4">
             {/* Back to Landing */}
@@ -175,6 +176,24 @@ export default function Home() {
               <StatsBar />
             </div>
           </div>
+        </div>
+        {/* Athlete silhouette showcase strip */}
+        <div className="relative overflow-hidden" style={{ height: '100px' }}>
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage: `url(${assetPath('assets/header-silhouette-bg.png')})`,
+              backgroundSize: 'auto 100%',
+              backgroundPosition: 'center center',
+              backgroundRepeat: 'repeat-x',
+            }}
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              background: 'linear-gradient(180deg, rgba(139,0,0,0.35) 0%, transparent 30%, transparent 70%, rgba(139,0,0,0.15) 100%)',
+            }}
+          />
         </div>
       </header>
 
