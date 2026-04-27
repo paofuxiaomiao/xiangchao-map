@@ -611,204 +611,219 @@ export default function FeatureModules() {
 
           {activeView === 'interactive' ? (
             <section className="space-y-6">
-              <div className="grid gap-6 xl:grid-cols-[0.94fr_1.06fr]">
-                <div className="space-y-6">
-                  <PortalPanel>
-                    <SectionHeader
-                      eyebrow="球迷互动"
-                      title="球队热度投票"
-                      description=""
-                      icon={Vote}
-                    />
-                    <div className="mt-5 space-y-3">
-                      {rankedTeams.slice(0, 6).map((team, index) => (
-                        <div key={team.id} className="flex items-center gap-4 rounded-[22px] border border-[#ebe0d6] bg-[oklch(0.985_0.002_260)] px-4 py-4">
-                          <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-white text-sm font-black">{index + 1}</div>
+              {/* ── 第一行：焦点战报 ── */}
+              <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+                {liveReports.slice(0, 3).map((report) => (
+                  <motion.div
+                    key={report.id}
+                    initial={{ opacity: 0, y: 16 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="relative overflow-hidden rounded-[28px] border border-[#e4d6ca] bg-white p-5 shadow-sm"
+                  >
+                    <div className="absolute -right-6 -top-6 h-28 w-28 rounded-full opacity-[0.06]" style={{ background: report.type === 'live' ? PORTAL_RED : report.type === 'upcoming' ? PORTAL_GOLD : '#999' }} />
+                    <div className="flex items-center justify-between gap-3">
+                      <div className={`rounded-full px-3 py-1 text-xs font-bold ${badgeClassName(report.type)}`}>{badgeLabel(report.type, report.minute)}</div>
+                      <div className="text-xs text-[oklch(0.55_0.02_260)]">{report.matchTime}</div>
+                    </div>
+                    <div className="mt-4 flex items-center justify-center gap-4">
+                      <div className="text-right">
+                        <div className="text-lg font-black" style={{ fontFamily: "'Noto Serif SC', serif" }}>{report.homeTeam}</div>
+                      </div>
+                      <div className="flex items-center gap-2 rounded-2xl bg-[oklch(0.97_0.002_260)] px-4 py-2">
+                        <span className="text-2xl font-black" style={{ fontFamily: "'DM Mono', monospace", color: PORTAL_RED }}>{report.homeScore ?? '-'}</span>
+                        <span className="text-sm text-[oklch(0.55_0.02_260)]">:</span>
+                        <span className="text-2xl font-black" style={{ fontFamily: "'DM Mono', monospace", color: PORTAL_RED }}>{report.awayScore ?? '-'}</span>
+                      </div>
+                      <div className="text-left">
+                        <div className="text-lg font-black" style={{ fontFamily: "'Noto Serif SC', serif" }}>{report.awayTeam}</div>
+                      </div>
+                    </div>
+                    <p className="mt-4 text-center text-sm leading-7 text-[oklch(0.48_0.02_260)]">{report.summary}</p>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* ── 第二行：投票 + 打气 ── */}
+              <div className="grid gap-6 xl:grid-cols-2">
+                {/* 投票区 */}
+                <PortalPanel>
+                  <SectionHeader eyebrow="球迷互动" title="球队热度投票" description="" icon={Vote} />
+                  <div className="mt-5 grid gap-2 sm:grid-cols-2">
+                    {rankedTeams.slice(0, 8).map((team, index) => {
+                      const disabled = Boolean(votedTeamId);
+                      const isSelected = votedTeamId === team.id;
+                      return (
+                        <button
+                          key={team.id}
+                          onClick={() => handleVote(team.id)}
+                          disabled={disabled}
+                          className={`group flex items-center gap-3 rounded-[20px] border px-4 py-3 text-left transition ${
+                            isSelected
+                              ? 'border-transparent text-white shadow-[0_8px_20px_rgba(143,31,31,0.16)]'
+                              : 'border-[#e7dbcf] bg-white hover:border-[#8F1F1F]/18 hover:shadow-sm'
+                          } ${disabled && !isSelected ? 'opacity-50' : ''}`}
+                          style={isSelected ? { background: `linear-gradient(135deg, ${PORTAL_RED}, ${team.color})` } : undefined}
+                        >
+                          <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-xl text-xs font-black ${
+                            isSelected ? 'bg-white/20 text-white' : 'bg-[oklch(0.96_0.002_260)] text-[oklch(0.40_0.02_260)]'
+                          }`}>{index + 1}</div>
                           <div className="min-w-0 flex-1">
-                            <div className="font-bold" style={{ color: team.color }}>{team.teamName}</div>
-                            <div className="mt-1 text-xs text-[oklch(0.55_0.02_260)]">{team.city}</div>
+                            <div className={`text-sm font-bold ${isSelected ? '' : ''}`} style={!isSelected ? { color: team.color } : undefined}>{team.teamName}</div>
+                            <div className={`text-xs ${isSelected ? 'text-white/70' : 'text-[oklch(0.55_0.02_260)]'}`}>
+                              {isSelected ? '已投票' : `${team.totalVotes} 票`}
+                            </div>
+                          </div>
+                          {!disabled && (
+                            <div className="shrink-0 rounded-full bg-[#8F1F1F]/8 px-2.5 py-1 text-[10px] font-bold text-[#8F1F1F] opacity-0 transition group-hover:opacity-100">投票</div>
+                          )}
+                        </button>
+                      );
+                    })}
+                  </div>
+                  {votedTeamId && (
+                    <div className="mt-4 rounded-2xl bg-[#8F1F1F]/[0.04] px-4 py-3 text-center text-sm text-[oklch(0.45_0.02_260)]">
+                      已为 <strong className="text-[#8F1F1F]">{featureTeams.find((t) => t.id === votedTeamId)?.teamName}</strong> 投出 1 票
+                    </div>
+                  )}
+                </PortalPanel>
+
+                {/* 打气区 */}
+                <PortalPanel>
+                  <SectionHeader eyebrow="看台应援" title="线上打气" description="" icon={Megaphone} />
+                  <div className="mt-5 grid gap-3 sm:grid-cols-1">
+                    {activeCulture.cheerTemplates.map((template) => {
+                      const count = cheerCounts[`${activeTeam.id}:${template}`] ?? 0;
+                      return (
+                        <button
+                          key={template}
+                          onClick={() => handleCheer(template)}
+                          className="group flex w-full items-center gap-4 rounded-[20px] border border-[#ebe0d6] bg-[oklch(0.985_0.002_260)] px-5 py-4 text-left transition hover:border-[#8F1F1F]/20 hover:shadow-sm active:scale-[0.99]"
+                        >
+                          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[#8F1F1F]/8 text-[#8F1F1F] transition group-hover:bg-[#8F1F1F]/14">
+                            <Megaphone className="h-4.5 w-4.5" />
+                          </div>
+                          <div className="min-w-0 flex-1">
+                            <div className="font-semibold text-[oklch(0.28_0.02_260)]">{template}</div>
+                            <div className="mt-0.5 text-xs text-[oklch(0.55_0.02_260)]">点击加入应援</div>
                           </div>
                           <div className="text-right">
-                            <div className="text-xl font-black" style={{ fontFamily: "'DM Mono', monospace" }}>{team.totalVotes}</div>
-                            <div className="text-[10px] uppercase tracking-[0.18em] text-[oklch(0.55_0.02_260)]">Votes</div>
+                            <div className="text-xl font-black text-[#8F1F1F]" style={{ fontFamily: "'DM Mono', monospace" }}>{count}</div>
+                            <div className="text-[10px] uppercase tracking-[0.18em] text-[oklch(0.55_0.02_260)]">Heat</div>
                           </div>
-                        </div>
-                      ))}
-                    </div>
-                    <div className="mt-5 grid gap-2 sm:grid-cols-2">
-                      {featureTeams.map((team) => {
-                        const disabled = Boolean(votedTeamId);
-                        const isSelected = votedTeamId === team.id;
-                        return (
-                          <button
-                            key={team.id}
-                            onClick={() => handleVote(team.id)}
-                            disabled={disabled}
-                            className={`rounded-[22px] border px-4 py-3 text-left transition ${
-                              isSelected
-                                ? 'border-transparent text-white shadow-[0_10px_24px_rgba(143,31,31,0.16)]'
-                                : 'border-[#e7dbcf] bg-white hover:border-[#8F1F1F]/18'
-                            } ${disabled && !isSelected ? 'opacity-60' : ''}`}
-                            style={isSelected ? { background: `linear-gradient(135deg, ${PORTAL_RED}, ${team.color})` } : undefined}
-                          >
-                            <div className="font-semibold">{team.teamName}</div>
-                            <div className={`mt-1 text-xs ${isSelected ? 'text-white/75' : 'text-[oklch(0.55_0.02_260)]'}`}>{isSelected ? '本机已投票' : '点击投出 1 票'}</div>
-                          </button>
-                        );
-                      })}
-                    </div>
-                  </PortalPanel>
-
-                  <PortalPanel>
-                    <SectionHeader
-                      eyebrow="看台应援"
-                      title="线上打气"
-                      description=""
-                      icon={Megaphone}
-                    />
-                    <div className="mt-5 space-y-3">
-                      {activeCulture.cheerTemplates.map((template) => {
-                        const count = cheerCounts[`${activeTeam.id}:${template}`] ?? 0;
-                        return (
-                          <button
-                            key={template}
-                            onClick={() => handleCheer(template)}
-                            className="flex w-full items-center justify-between rounded-[22px] border border-[#ebe0d6] bg-[oklch(0.985_0.002_260)] px-4 py-4 text-left transition hover:border-[#8F1F1F]/20"
-                          >
-                            <div>
-                              <div className="font-semibold text-[oklch(0.28_0.02_260)]">{template}</div>
-                              <div className="mt-1 text-xs text-[oklch(0.55_0.02_260)]">点击一次即可加入线上应援热度</div>
-                            </div>
-                            <div className="text-right">
-                              <div className="text-xl font-black text-[#8F1F1F]" style={{ fontFamily: "'DM Mono', monospace" }}>{count}</div>
-                              <div className="text-[10px] uppercase tracking-[0.18em] text-[oklch(0.55_0.02_260)]">Heat</div>
-                            </div>
-                          </button>
-                        );
-                      })}
-                    </div>
-                  </PortalPanel>
-                </div>
-
-                <div className="space-y-6">
-                  <PortalPanel>
-                    <SectionHeader
-                      eyebrow="比赛评论"
-                      title="评论与比赛动态"
-                      description=""
-                      icon={Send}
-                    />
-                    <div className="mt-5 grid gap-5 xl:grid-cols-[0.9fr_1.1fr]">
-                      <div className="grid gap-3">
-                        <input
-                          value={nickname}
-                          onChange={(event) => setNickname(event.target.value)}
-                          placeholder="你的昵称"
-                          className="h-11 rounded-2xl border border-[#e6d8cb] bg-[oklch(0.985_0.002_260)] px-4 text-sm outline-none transition focus:border-[#8F1F1F]/40"
-                        />
-                        <select
-                          value={messageTeamId}
-                          onChange={(event) => setMessageTeamId(event.target.value)}
-                          className="h-11 rounded-2xl border border-[#e6d8cb] bg-[oklch(0.985_0.002_260)] px-4 text-sm outline-none transition focus:border-[#8F1F1F]/40"
-                        >
-                          {featureTeams.map((team) => (
-                            <option key={team.id} value={team.id}>{team.teamName}</option>
-                          ))}
-                        </select>
-                        <textarea
-                          value={messageContent}
-                          onChange={(event) => setMessageContent(event.target.value)}
-                          placeholder={`写下你对 ${featureTeams.find((team) => team.id === messageTeamId)?.teamName ?? activeTeam.teamName} 的评价或赛前打气`}
-                          className="min-h-[132px] rounded-[24px] border border-[#e6d8cb] bg-[oklch(0.985_0.002_260)] px-4 py-3 text-sm outline-none transition focus:border-[#8F1F1F]/40"
-                        />
-                        <button
-                          onClick={handleSubmitMessage}
-                          className="inline-flex items-center justify-center gap-2 rounded-full bg-[linear-gradient(135deg,#8F1F1F,#B83131)] px-4 py-3 text-sm font-bold text-white shadow-[0_12px_28px_rgba(143,31,31,0.16)] transition hover:translate-y-[-1px]"
-                        >
-                          <Send className="h-4 w-4" />
-                          发送评论
                         </button>
-                      </div>
-
-                      <div className="grid gap-3">
-                        {messages.slice(0, 5).map((message) => (
-                          <div key={message.id} className="rounded-[24px] border border-[#ebe0d6] bg-white px-4 py-4">
-                            <div className="flex items-center justify-between gap-3">
-                              <div className="font-semibold">{message.nickname}</div>
-                              <div className="text-xs text-[oklch(0.55_0.02_260)]">{message.createdAt}</div>
-                            </div>
-                            <div className="mt-1 text-xs uppercase tracking-[0.18em] text-[#8F1F1F]">{message.teamName}</div>
-                            <p className="mt-3 text-sm leading-7 text-[oklch(0.42_0.02_260)]">{message.content}</p>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                    <div className="mt-5 grid gap-3">
-                      {liveReports.slice(0, 3).map((report) => (
-                        <motion.div
-                          key={report.id}
-                          initial={{ opacity: 0, y: 12 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          className="rounded-[24px] border border-[#ebe0d6] bg-[linear-gradient(180deg,#ffffff,#fff8f4)] p-5"
-                        >
-                          <div className="flex items-center justify-between gap-3">
-                            <div>
-                              <div className="text-xs uppercase tracking-[0.18em] text-[oklch(0.55_0.02_260)]">{report.title}</div>
-                              <div className="mt-2 text-lg font-black" style={{ fontFamily: "'Noto Serif SC', serif" }}>{report.homeTeam} VS {report.awayTeam}</div>
-                            </div>
-                            <div className={`rounded-full px-3 py-1 text-xs font-bold ${badgeClassName(report.type)}`}>{badgeLabel(report.type, report.minute)}</div>
-                          </div>
-                          <div className="mt-4 text-sm leading-7 text-[oklch(0.45_0.02_260)]">{report.summary}</div>
-                        </motion.div>
-                      ))}
-                    </div>
-                  </PortalPanel>
-
-                  <PortalPanel>
-                    <SectionHeader
-                      eyebrow="阵容互动"
-                      title="球员打分"
-                      description=""
-                      icon={Star}
-                    />
-                    <div className="mt-5 grid gap-4 lg:grid-cols-3">
-                      {activeDashboard.players.map((player) => {
-                        const ratingMeta = buildPlayerRatingMeta(player, playerRatings[player.id]);
-                        return (
-                          <div key={player.id} className="rounded-[24px] border border-[#ebe0d6] bg-[oklch(0.985_0.002_260)] p-4">
-                            <div className="flex items-start justify-between gap-3">
-                              <div>
-                                <div className="text-xs uppercase tracking-[0.18em] text-[oklch(0.55_0.02_260)]">#{player.jerseyNumber} · {player.position}</div>
-                                <div className="mt-1 text-lg font-black" style={{ fontFamily: "'Noto Serif SC', serif" }}>{player.name}</div>
-                              </div>
-                              <div className="rounded-full bg-[#8F1F1F]/8 px-3 py-1 text-sm font-black text-[#8F1F1F]">{ratingMeta.average.toFixed(1)}</div>
-                            </div>
-                            <div className="mt-4 grid grid-cols-2 gap-3 text-sm">
-                              <MiniStat label="身高" value={player.height} />
-                              <MiniStat label="体重" value={player.weight} />
-                              <MiniStat label="进球" value={`${player.goals}`} />
-                              <MiniStat label="票数" value={`${ratingMeta.count}`} />
-                            </div>
-                            <p className="mt-4 text-sm leading-7 text-[oklch(0.42_0.02_260)]">{player.contribution}</p>
-                            <div className="mt-4 flex flex-wrap gap-2">
-                              {[1, 2, 3, 4, 5].map((score) => (
-                                <button
-                                  key={score}
-                                  onClick={() => handleRatePlayer(player, score)}
-                                  className={`rounded-full px-3 py-1.5 text-sm font-semibold transition ${ratingMeta.userScore === score ? 'bg-[#8F1F1F] text-white' : 'bg-white text-[oklch(0.45_0.02_260)]'}`}
-                                >
-                                  {score} 分
-                                </button>
-                              ))}
-                            </div>
-                            <div className="mt-3 text-xs text-[oklch(0.55_0.02_260)]">当前设备评分：{ratingMeta.userScore ?? '未选择'}，默认样本已累计 {ratingMeta.count} 票。</div>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </PortalPanel>
-                </div>
+                      );
+                    })}
+                  </div>
+                  {/* 横幅墙快览 */}
+                  <div className="mt-5 flex flex-wrap gap-2">
+                    {activeCulture.bannerSamples.map((banner) => (
+                      <span key={banner} className="rounded-full border border-[#eadbce] bg-white px-3 py-1.5 text-xs font-medium text-[oklch(0.40_0.02_260)]">
+                        {banner}
+                      </span>
+                    ))}
+                  </div>
+                </PortalPanel>
               </div>
+
+              {/* ── 第三行：球员打分 ── */}
+              <PortalPanel>
+                <SectionHeader eyebrow="阵容互动" title="球员打分" description="" icon={Star} />
+                <div className="mt-5 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+                  {activeDashboard.players.map((player) => {
+                    const ratingMeta = buildPlayerRatingMeta(player, playerRatings[player.id]);
+                    return (
+                      <div key={player.id} className="rounded-[24px] border border-[#ebe0d6] bg-[oklch(0.985_0.002_260)] p-5">
+                        <div className="flex items-start justify-between gap-3">
+                          <div>
+                            <div className="text-xs uppercase tracking-[0.18em] text-[oklch(0.55_0.02_260)]">#{player.jerseyNumber} · {player.position}</div>
+                            <div className="mt-1 text-lg font-black" style={{ fontFamily: "'Noto Serif SC', serif" }}>{player.name}</div>
+                          </div>
+                          <div className="rounded-full bg-[#8F1F1F]/8 px-3 py-1.5 text-sm font-black text-[#8F1F1F]">{ratingMeta.average.toFixed(1)}</div>
+                        </div>
+                        <div className="mt-4 grid grid-cols-3 gap-2 text-sm">
+                          <MiniStat label="进球" value={`${player.goals}`} />
+                          <MiniStat label="身高" value={player.height} />
+                          <MiniStat label="体重" value={player.weight} />
+                        </div>
+                        <p className="mt-3 text-sm leading-7 text-[oklch(0.42_0.02_260)]">{player.contribution}</p>
+                        <div className="mt-4 flex items-center gap-1">
+                          {[1, 2, 3, 4, 5].map((score) => (
+                            <button
+                              key={score}
+                              onClick={() => handleRatePlayer(player, score)}
+                              className="group p-1 transition"
+                            >
+                              <Star className={`h-5 w-5 transition ${
+                                (ratingMeta.userScore ?? 0) >= score
+                                  ? 'fill-[#8F1F1F] text-[#8F1F1F]'
+                                  : 'text-[#ddd] group-hover:text-[#8F1F1F]/40'
+                              }`} />
+                            </button>
+                          ))}
+                          <span className="ml-2 text-xs text-[oklch(0.55_0.02_260)]">{ratingMeta.count} 票</span>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </PortalPanel>
+
+              {/* ── 第四行：评论区 ── */}
+              <PortalPanel>
+                <SectionHeader eyebrow="球迷声音" title="评论与留言" description="" icon={Send} />
+                {/* 发言输入 */}
+                <div className="mt-5 flex flex-col gap-3 rounded-[24px] border border-[#e6d8cb] bg-[oklch(0.985_0.002_260)] p-4 sm:flex-row sm:items-end">
+                  <input
+                    value={nickname}
+                    onChange={(event) => setNickname(event.target.value)}
+                    placeholder="昵称"
+                    className="h-10 w-full rounded-xl border border-[#e6d8cb] bg-white px-3 text-sm outline-none transition focus:border-[#8F1F1F]/40 sm:w-28"
+                  />
+                  <select
+                    value={messageTeamId}
+                    onChange={(event) => setMessageTeamId(event.target.value)}
+                    className="h-10 w-full rounded-xl border border-[#e6d8cb] bg-white px-3 text-sm outline-none transition focus:border-[#8F1F1F]/40 sm:w-32"
+                  >
+                    {featureTeams.map((team) => (
+                      <option key={team.id} value={team.id}>{team.teamName}</option>
+                    ))}
+                  </select>
+                  <textarea
+                    value={messageContent}
+                    onChange={(event) => setMessageContent(event.target.value)}
+                    placeholder={`写下你对 ${featureTeams.find((team) => team.id === messageTeamId)?.teamName ?? activeTeam.teamName} 的评价或赛前打气…`}
+                    rows={2}
+                    className="min-h-[56px] w-full flex-1 rounded-xl border border-[#e6d8cb] bg-white px-3 py-2 text-sm outline-none transition focus:border-[#8F1F1F]/40"
+                  />
+                  <button
+                    onClick={handleSubmitMessage}
+                    className="inline-flex h-10 shrink-0 items-center justify-center gap-2 rounded-xl bg-[linear-gradient(135deg,#8F1F1F,#B83131)] px-5 text-sm font-bold text-white shadow-[0_8px_20px_rgba(143,31,31,0.14)] transition hover:translate-y-[-1px]"
+                  >
+                    <Send className="h-3.5 w-3.5" />
+                    发送
+                  </button>
+                </div>
+                {/* 留言列表 */}
+                <div className="mt-5 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+                  {messages.slice(0, 6).map((message) => (
+                    <div key={message.id} className="rounded-[20px] border border-[#ebe0d6] bg-white px-4 py-4">
+                      <div className="flex items-center gap-2">
+                        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#8F1F1F]/8 text-xs font-bold text-[#8F1F1F]">
+                          {message.nickname.charAt(0)}
+                        </div>
+                        <div className="min-w-0 flex-1">
+                          <div className="flex items-center gap-2">
+                            <span className="text-sm font-semibold">{message.nickname}</span>
+                            <span className="rounded-full bg-[#8F1F1F]/[0.06] px-2 py-0.5 text-[10px] font-medium text-[#8F1F1F]">{message.teamName}</span>
+                          </div>
+                          <div className="text-[10px] text-[oklch(0.55_0.02_260)]">{message.createdAt}</div>
+                        </div>
+                      </div>
+                      <p className="mt-3 text-sm leading-7 text-[oklch(0.42_0.02_260)]">{message.content}</p>
+                    </div>
+                  ))}
+                </div>
+              </PortalPanel>
             </section>
           ) : null}
 
