@@ -182,10 +182,10 @@ export default function Home() {
           <div
             className="absolute inset-0"
             style={{
-              backgroundImage: `url(${assetPath('assets/header-silhouette-bg.png')})`,
-              backgroundSize: 'auto 100%',
+              backgroundImage: `url(${assetPath('assets/header-silhouette-strip.png')})`,
+              backgroundSize: '100% 100%',
               backgroundPosition: 'center center',
-              backgroundRepeat: 'repeat-x',
+              backgroundRepeat: 'no-repeat',
             }}
           />
           <div
