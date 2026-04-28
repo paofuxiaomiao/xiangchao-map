@@ -66,7 +66,7 @@ export default function TeamList({ selectedTeam, onTeamSelect }: TeamListProps) 
           </h3>
         </div>
         <p className="text-[10px] text-[oklch(0.55_0.02_260)] mt-1.5 ml-[34px]" style={{ fontFamily: "'Noto Sans SC', sans-serif" }}>
-          2025 湘超联赛 · 全部 {allTeams.length} 支球队
+          2026 湘超联赛 · 全部 {allTeams.length} 支球队
         </p>
         <div className="mt-3 h-px bg-gradient-to-r from-[#D32F2F]/15 to-transparent" />
       </div>
@@ -203,7 +203,7 @@ export default function TeamList({ selectedTeam, onTeamSelect }: TeamListProps) 
       {/* Footer */}
       <div className="px-4 py-3 border-t border-[oklch(0.93_0.005_260)]">
         <p className="text-[9px] text-[oklch(0.65_0.01_260)] text-center" style={{ fontFamily: "'Noto Sans SC', sans-serif" }}>
-          数据来源：2025 湘超联赛
+          数据来源：2026 湘超联赛
         </p>
       </div>
     </div>

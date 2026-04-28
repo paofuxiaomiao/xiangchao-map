@@ -154,7 +154,7 @@ export default function Home() {
                   className="text-[10px] text-white/50 tracking-[0.15em]"
                   style={{ fontFamily: "'Noto Sans SC', sans-serif" }}
                 >
-                  2025 湘超联赛
+                  2026 湘超联赛
                 </span>
                 <div className="w-px h-3 bg-white/20" />
                 <div className="flex items-center gap-1 px-2 py-0.5 rounded-sm bg-white/10 border border-white/15">

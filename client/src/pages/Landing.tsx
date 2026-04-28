@@ -346,7 +346,7 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* ===== 2025赛季即将开启提示卡片 ===== */}
+      {/* ===== 2026赛季即将开启提示卡片 ===== */}
       <section className="relative py-16 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0A] via-[#1A0505] to-[#0A0A0A]" />
         <div className="relative z-10 max-w-3xl mx-auto px-6">
@@ -364,7 +364,7 @@ export default function Landing() {
             <div className="relative">
               <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-4 rounded-full border border-[#FFD54F]/20 bg-[#FFD54F]/5">
                 <Flame className="w-3.5 h-3.5 text-[#FFD54F]" />
-                <span className="text-xs tracking-[0.15em] text-[#FFD54F]" style={{ fontFamily: "'DM Mono', monospace" }}>COMING SOON</span>
+                <span className="text-xs tracking-[0.15em] text-[#FFD54F]" style={{ fontFamily: "'DM Mono', monospace" }}>即将开赛</span>
               </div>
               <h3
                 className="text-2xl md:text-3xl font-black mb-3"
@@ -375,7 +375,7 @@ export default function Landing() {
                   WebkitTextFillColor: 'transparent',
                 }}
               >
-                2025赛季即将开启
+                2026赛季即将开启
               </h3>
               <p className="text-white/50 text-base max-w-lg mx-auto leading-relaxed" style={{ fontFamily: "'Noto Sans SC', sans-serif" }}>
                 新赛季蓄势待发，更多精彩赛事敬请期待。让我们一起期待三湘足球的下一次燃烧！
@@ -466,7 +466,7 @@ export default function Landing() {
               <div className="space-y-5 text-white/50 leading-relaxed" style={{ fontFamily: "'Noto Sans SC', sans-serif" }}>
                 <p>
                   湘超联赛，全称湖南省足球联赛，是一项由湖南省体育局主办的省级足球赛事。
-                  2025赛季共有14支城市代表队参赛，历时112天，覆盖全省14个市州。
+                  2026赛季共有14支城市代表队参赛，历时112天，覆盖全省14个市州。
                 </p>
                 <p>
                   从长沙贺龙体育场的万人齐呼，到永州零陵的草根逆袭；从常德伢子的霸蛮拼搏，
@@ -733,7 +733,7 @@ export default function Landing() {
             </span>
           </div>
           <span className="text-xs text-white/15" style={{ fontFamily: "'DM Mono', monospace" }}>
-            2025 湘超联赛 · 数字地图看板
+            2026 湘超联赛 · 数字地图看板
           </span>
         </div>
       </footer>

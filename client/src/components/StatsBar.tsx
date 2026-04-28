@@ -170,10 +170,10 @@ export default function StatsBar() {
                 <Timer className="w-5 h-5" />
                 赛程缩略图
                 <span className="ml-2 text-[10px] font-medium text-white/70 tracking-[0.18em]">
-                  2025 SEASON · {leagueStats.duration}
+                  2026 赛季 · {leagueStats.duration}
                 </span>
               </DialogTitle>
-              <DialogDescription className="sr-only">2025 湘超联赛赛季阶段与最近比赛速览</DialogDescription>
+              <DialogDescription className="sr-only">2026 湘超联赛赛季阶段与最近比赛速览</DialogDescription>
             </DialogHeader>
           </div>
 
